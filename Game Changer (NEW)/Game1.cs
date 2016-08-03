@@ -32,6 +32,8 @@ namespace Game_Changer__NEW_
 
             base.Initialize();
             myScene = Scene.createWithDefaultRenderer(Color.CornflowerBlue);
+            myScene.setDesignResolution(960, 512, Scene.SceneResolutionPolicy.ExactFit);
+            
 
             var tiledEntity = myScene.createEntity("tiled-map");
             var tiledmap = content.Load<TiledMap>("tilemap");
