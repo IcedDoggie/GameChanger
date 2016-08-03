@@ -1,21 +1,23 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Nez;
+using Nez.Sprites;
+using Nez.Tiled;
 
 namespace Game_Changer__NEW_
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class Game1 : Core
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        private Scene myScene;
 
         public Game1()
         {
-            graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
         }
 
         /// <summary>
@@ -29,9 +31,14 @@ namespace Game_Changer__NEW_
             // TODO: Add your initialization logic here
 
             base.Initialize();
-        }
+            myScene = Scene.createWithDefaultRenderer(Color.CornflowerBlue);
 
-        /// <summary>
+            var tiledEntity = myScene.createEntity("tiled-map");
+            var tiledmap = content.Load<TiledMap>("tilemap");
+            tiledEntity.addComponent(new TiledMapComponent(tiledmap));
+
+            Core.scene = myScene;
+        }        /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
         /// </summary>
