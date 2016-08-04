@@ -5,6 +5,7 @@ using Nez;
 using Nez.Sprites;
 using Nez.Tiled;
 
+
 namespace Game_Changer__NEW_
 {
     /// <summary>
@@ -12,9 +13,10 @@ namespace Game_Changer__NEW_
     /// </summary>
     public class Game1 : Core
     {
-        GraphicsDeviceManager graphics;
+        
         SpriteBatch spriteBatch;
         private Scene myScene;
+       
 
         public Game1()
         {
@@ -37,7 +39,16 @@ namespace Game_Changer__NEW_
 
             var tiledEntity = myScene.createEntity("tiled-map");
             var tiledmap = content.Load<TiledMap>("tilemap");
-            tiledEntity.addComponent(new TiledMapComponent(tiledmap));
+            //tiledEntity.addComponent(new TiledMapComponent(tiledmap));
+            var tiledMapComponent = tiledEntity.addComponent(new TiledMapComponent(tiledmap));
+            
+
+            var selectEntity = myScene.createEntity("select-map");
+            var tileSelect = new SelectTile(tiledmap);
+            var selectmap = tiledEntity.addComponent(tileSelect);
+            tiledMapComponent.setLayersToRender( "maplayer" );
+            tiledMapComponent.renderLayer = 1;
+
 
             Core.scene = myScene;
         }        /// <summary>
@@ -50,6 +61,7 @@ namespace Game_Changer__NEW_
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
+            
         }
 
         /// <summary>
@@ -66,15 +78,15 @@ namespace Game_Changer__NEW_
         /// checking for collisions, gathering input, and playing audio.
         /// </summary>
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Update(GameTime gameTime)
-        {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
+        //protected override void Update(GameTime gameTime)
+        //{
+        //    if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+        //        Exit();
 
-            // TODO: Add your update logic here
+        //    // TODO: Add your update logic here
 
-            base.Update(gameTime);
-        }
+        //    base.Update(gameTime);
+        //}
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -82,7 +94,7 @@ namespace Game_Changer__NEW_
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            
 
             // TODO: Add your drawing code here
 
