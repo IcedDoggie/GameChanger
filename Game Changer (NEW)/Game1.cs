@@ -36,19 +36,24 @@ namespace Game_Changer__NEW_
             myScene = Scene.createWithDefaultRenderer(Color.CornflowerBlue);
             myScene.setDesignResolution(960, 512, Scene.SceneResolutionPolicy.ExactFit);
             
-
+            //Loading tilemap
             var tiledEntity = myScene.createEntity("tiled-map");
             var tiledmap = content.Load<TiledMap>("tilemap");
-            //tiledEntity.addComponent(new TiledMapComponent(tiledmap));
             var tiledMapComponent = tiledEntity.addComponent(new TiledMapComponent(tiledmap));
-            
 
-            var selectEntity = myScene.createEntity("select-map");
+            //Loading Tile Functionality, like creating coordinates    
             var tileSelect = new SelectTile(tiledmap);
             var selectmap = tiledEntity.addComponent(tileSelect);
-            tiledMapComponent.setLayersToRender( "maplayer" );
+            tiledMapComponent.setLayersToRender("maplayer");
             tiledMapComponent.renderLayer = 1;
 
+            var russiaEntity = myScene.createEntity("russiaFact", new Vector2(590,180)); 
+            var russiaInMap = content.Load<Texture2D>("russia");
+            var russiaComponent = russiaEntity.addComponent(new Sprite(russiaInMap));
+
+            var usaEntity = myScene.createEntity("usaFact", new Vector2(175, 115));
+            var usaInMap = content.Load<Texture2D>("usa");
+            var usaComponent = usaEntity.addComponent(new Sprite(usaInMap));
 
             Core.scene = myScene;
         }        /// <summary>
