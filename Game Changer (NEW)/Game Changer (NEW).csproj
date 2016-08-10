@@ -38,6 +38,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="army.cs" />
     <Compile Include="Cursor.cs" />
     <Compile Include="Controlpoint.cs" />
     <Compile Include="Faction.cs" />
