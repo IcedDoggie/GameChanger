@@ -87,9 +87,13 @@ namespace Game_Changer__NEW_
             var chinaComponent = chinaEntity.addComponent(new Sprite(chinaInMap));
 
             //army testing
-           // var armyEntity = myScene.createEntity("army", new Vector2(600, 239));
-          // var armyunit = armyEntity.addComponent(new army());
-           // var armyComponent = armyEntity.addComponent(new Sprite(armyunit));
+            //var armyEntity = myScene.createEntity("army", new Vector2(600, 239));
+            //var armyunit = armyEntity.addComponent(new Army());
+            //var armyComponent = armyEntity.addComponent(new Sprite(armyunit));
+
+            // add pathfinder
+            var pathfinderEntity = myScene.createEntity("pathfinder");
+            var pathfinderComponent = pathfinderEntity.addComponent(new Pathfinder(tiledmap));
 
 
             Core.scene = myScene;

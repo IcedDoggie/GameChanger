@@ -13,24 +13,29 @@ using Nez.TextureAtlases;
 
 namespace Game_Changer__NEW_
 {
-    class army : Entity
+    class Army : Entity
     {
         
         Sprite<Animation> _animation;
         Mover _mover;
         float _moveSpeed = 100f;
 
-       // public override void onAddedToEntity()
+        //public override void onAddedToEntity()
         //{
-            // load up our character texture atlas. we have different characters in 1 - 6.png for variety
-           // var characterPng = Nez.Random.range(1, 7);
-           // var texture = entity.scene.content.Load<Texture2D>("army_png/Frame-1");
-           // var subtextures = Subtexture.subtexturesFromAtlas(texture, 16, 16);
+        //   load up our character texture atlas. we have different characters in 1 - 6.png for variety
+        //   var characterPng = Nez.Random.range(1, 7);
+        //   var texture = entity.scene.content.Load<Texture2D>("army_png/Frame-1");
+        //   var subtextures = Subtexture.subtexturesFromAtlas(texture, 16, 16);
 
-            
 
-            
-       // }
+
+
+        //}
+
+        public Army()
+        {
+
+        }
 
 
         public enum Animation

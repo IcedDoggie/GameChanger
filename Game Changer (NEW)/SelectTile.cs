@@ -36,7 +36,7 @@ namespace Game_Changer__NEW_
             if (Input.leftMouseButtonPressed)
             {
                 location = tiledmap.worldToTilePosition(Input.mousePosition);
-                System.Diagnostics.Debug.WriteLine(location);
+                //System.Diagnostics.Debug.WriteLine(location);
             }
             
             
