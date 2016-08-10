@@ -35,6 +35,13 @@ namespace Game_Changer__NEW_
             base.Initialize();
             myScene = Scene.createWithDefaultRenderer(Color.CornflowerBlue);
             myScene.setDesignResolution(960, 512, Scene.SceneResolutionPolicy.ExactFit);
+
+            //Create Faction 
+            var usaFaction = new Faction("USA");
+            var russiaFaction = new Faction("Russia");
+
+            //Create Control Point
+
             
             //Loading tilemap
             var tiledEntity = myScene.createEntity("tiled-map");
@@ -54,6 +61,10 @@ namespace Game_Changer__NEW_
             var usaEntity = myScene.createEntity("usaFact", new Vector2(175, 115));
             var usaInMap = content.Load<Texture2D>("usa");
             var usaComponent = usaEntity.addComponent(new Sprite(usaInMap));
+
+                
+
+
 
             Core.scene = myScene;
         }        /// <summary>
