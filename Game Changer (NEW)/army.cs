@@ -10,54 +10,60 @@ using Nez.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Nez.TextureAtlases;
+using Nez;
+using Nez.Sprites;
+using Nez.Tiled;
 
 namespace Game_Changer__NEW_
 {
-    class army : Entity
+    class army : Component, IUpdatable
     {
+        TiledMap tiledmap;
+        Point location;
+        int pointX, pointY;
+
+        public float speed = 100f;
+
+        public army(TiledMap ref_tiledmap)
+        {
+            location = new Point(100,100);
+            tiledmap = ref_tiledmap;
+            var layer = tiledmap.getLayer<TiledTileLayer>("maplayer");
+            
+        }
+
+        public void update()
+        {
+            Vector2 moveDir = Vector2.Zero;
+            /*if (Input.isKeyDown(Keys.Left))
+                moveDir.X = -1f;
+            else if (Input.isKeyDown(Keys.Right))
+                moveDir.X = 1f;
+
+            if (Input.isKeyDown(Keys.Up))
+                moveDir.Y = -1f;
+            else if (Input.isKeyDown(Keys.Down))
+                moveDir.Y = 1f;
+            entity.transform.position += moveDir * speed * Time.deltaTime;*/
+            if (Input.leftMouseButtonPressed)
+            {
+                location = tiledmap.worldToTilePosition(Input.mousePosition);
+                pointX = location.X;
+                pointY = location.Y;
+
+                System.Diagnostics.Debug.WriteLine(location);
+                if (entity.transform.position.X < pointX)
+                    moveDir.X = 1f;
+                else if (entity.transform.position.X > pointX)
+                    moveDir.X = -1f;
+                if (entity.transform.position.Y < location.Y)
+                    moveDir.Y = 1f;
+                else if (entity.transform.position.Y > location.Y)
+                    moveDir.Y = -1f;
+                entity.transform.position += moveDir * speed * Time.deltaTime;
+            }
+                
+        }
         
-        Sprite<Animation> _animation;
-        Mover _mover;
-        float _moveSpeed = 100f;
-
-       // public override void onAddedToEntity()
-        //{
-            // load up our character texture atlas. we have different characters in 1 - 6.png for variety
-           // var characterPng = Nez.Random.range(1, 7);
-           // var texture = entity.scene.content.Load<Texture2D>("army_png/Frame-1");
-           // var subtextures = Subtexture.subtexturesFromAtlas(texture, 16, 16);
-
-            
-
-            
-       // }
-
-
-        public enum Animation
-        {
-            Walk
-        }
-
-        private void setupAnimation(TextureAtlas atlas)
-        {
- 
-            _animation.addAnimation(Animation.Walk, atlas.getSpriteAnimation("arm_png"));
-           
-        }
-
-        public void playAnimation(Animation anim)
-        {
-            
-                _animation.play(anim);
-         
-        }
-
-        public override void onAddedToScene()
-        {
-            playAnimation(Animation.Walk);
-
-            
-            base.onAddedToScene();
-        }
     }
 }

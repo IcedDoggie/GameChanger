@@ -99,19 +99,15 @@
 /processorParam:TextureFormat=Color
 /build:usa.png
 
-#begin army_png/Frame-1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:army_png/Frame-1.png
+#begin armyAtlas.xml
+/importer:XmlImporter
+/processor:TextureAtlasProcessor
+/processorParam:compressTexture=False
+/processorParam:animationFPS=10
+/processorParam:flattenPaths=True
+/build:armyAtlas.xml
 
-#begin army_png/frame-2.png
+#begin army-png/flyright/flyright1.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -121,9 +117,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:army_png/frame-2.png
+/build:army-png/flyright/flyright1.png
 
-#begin army_png/frame-3.png
+#begin army-png/flyright/flyright2.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -133,9 +129,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:army_png/frame-3.png
+/build:army-png/flyright/flyright2.png
 
-#begin army_png/frame-4.png
+#begin army-png/flyright/flyright3.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -145,5 +141,17 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:army_png/frame-4.png
+/build:army-png/flyright/flyright3.png
+
+#begin army-png/flyright/flyright4.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:army-png/flyright/flyright4.png
 

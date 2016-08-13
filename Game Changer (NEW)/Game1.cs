@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Nez;
 using Nez.Sprites;
+using Nez.TextureAtlases;
 using Nez.Tiled;
 
 
@@ -11,6 +12,12 @@ namespace Game_Changer__NEW_
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
+    /// 
+    public enum Animation
+    {
+        FlyRight,
+        FlyLeft
+    }
     public class Game1 : Core
     {
         
@@ -18,8 +25,9 @@ namespace Game_Changer__NEW_
         private Scene myScene;
        
 
-        public Game1()
+        public Game1() : base()
         {
+            Window.AllowUserResizing = true;
         }
 
         /// <summary>
@@ -80,10 +88,19 @@ namespace Game_Changer__NEW_
             var chinaComponent = chinaEntity.addComponent(new Sprite(chinaInMap));
 
             //army testing
-           // var armyEntity = myScene.createEntity("army", new Vector2(600, 239));
-          // var armyunit = armyEntity.addComponent(new army());
-           // var armyComponent = armyEntity.addComponent(new Sprite(armyunit));
+            // var armyEntity = myScene.createEntity("armyFact", new Vector2(700, 239)); 
+            //var armyInMap = content.Load<Texture2D>("army-png/smallarmy");
+            //var armyComponent = armyEntity.addComponent(new Sprite(armyInMap));
+            var armyAtlas = myScene.contentManager.Load<TextureAtlas>("armyAtlas");
+            var anim = armyAtlas.getSpriteAnimation("flyright");
 
+            var armyEntity = myScene.createEntity("armyInMap");
+            armyEntity.addComponent(new Sprite<Animation>(Animation.FlyRight, anim));
+            armyEntity.addComponent(new army(tiledmap));
+            armyEntity.transform.position = new Vector2(200, 200);
+
+            var spriteArmy = armyEntity.getComponent<Sprite<Animation>>();
+            spriteArmy.play(Animation.FlyRight);
             Core.scene = myScene;
         }        /// <summary>
         /// LoadContent will be called once per game and is the place to load

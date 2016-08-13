@@ -30,13 +30,16 @@ namespace Game_Changer__NEW_
         }
 
 
-
+        public float speed = 100f;
         void IUpdatable.update()
         {
+            var moveDir = Vector2.Zero;
             if (Input.leftMouseButtonPressed)
             {
                 location = tiledmap.worldToTilePosition(Input.mousePosition);
                 System.Diagnostics.Debug.WriteLine(location);
+                
+
             }
             
             
