@@ -10,15 +10,19 @@ using Nez.Textures;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Nez.TextureAtlases;
+using Nez;
+using Nez.Sprites;
+using Nez.Tiled;
 
 namespace Game_Changer__NEW_
 {
-    class Army : Entity
+
+    class Army : Component, IUpdatable
     {
-        
-        Sprite<Animation> _animation;
-        Mover _mover;
-        float _moveSpeed = 100f;
+        TiledMap tiledmap;
+        Point location;
+        int pointX, pointY;
+
 
         //public override void onAddedToEntity()
         //{
@@ -32,37 +36,50 @@ namespace Game_Changer__NEW_
 
         //}
 
-        public Army()
+
+
+        public float speed = 100f;
+
+        public Army(TiledMap ref_tiledmap)
         {
-
-        }
-
-
-        public enum Animation
-        {
-            Walk
-        }
-
-        private void setupAnimation(TextureAtlas atlas)
-        {
- 
-            _animation.addAnimation(Animation.Walk, atlas.getSpriteAnimation("arm_png"));
-           
-        }
-
-        public void playAnimation(Animation anim)
-        {
+            location = new Point(100,100);
+            tiledmap = ref_tiledmap;
+            var layer = tiledmap.getLayer<TiledTileLayer>("maplayer");
             
-                _animation.play(anim);
-         
         }
 
-        public override void onAddedToScene()
+        public void update()
         {
-            playAnimation(Animation.Walk);
+            Vector2 moveDir = Vector2.Zero;
+            /*if (Input.isKeyDown(Keys.Left))
+                moveDir.X = -1f;
+            else if (Input.isKeyDown(Keys.Right))
+                moveDir.X = 1f;
 
-            
-            base.onAddedToScene();
+            if (Input.isKeyDown(Keys.Up))
+                moveDir.Y = -1f;
+            else if (Input.isKeyDown(Keys.Down))
+                moveDir.Y = 1f;
+            entity.transform.position += moveDir * speed * Time.deltaTime;*/
+            //if (Input.leftMouseButtonPressed)
+            //{
+                location = tiledmap.worldToTilePosition(Input.mousePosition);
+                pointX = location.X;
+                pointY = location.Y;
+
+                System.Diagnostics.Debug.WriteLine(location);
+                if (entity.transform.position.X < pointX)
+                    moveDir.X = 10f;
+                else if (entity.transform.position.X > pointX)
+                    moveDir.X = -100f;
+                if (entity.transform.position.Y < location.Y)
+                    moveDir.Y = 10f;
+                else if (entity.transform.position.Y > location.Y)
+                    moveDir.Y = -100f;
+                entity.transform.position += moveDir * speed * Time.deltaTime;
+            //}
+                
         }
+        
     }
 }

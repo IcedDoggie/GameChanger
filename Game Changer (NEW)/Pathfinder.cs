@@ -16,9 +16,6 @@ namespace Game_Changer__NEW_
         public override float width { get { return 1000; } }
         public override float height { get { return 1000; } }
 
-        //UnweightedGridGraph _gridGraph;
-        //List<Point> _breadthSearchPath;
-
         WeightedGridGraph _astarGraph;
         List<Point> _astarSearchPath;
 
@@ -33,9 +30,6 @@ namespace Game_Changer__NEW_
             
             start = new Point(1, 1);
             end = new Point(10, 10);
-
-            //_gridGraph = new UnweightedGridGraph(layer);
-            //_breadthSearchPath = _gridGraph.search(start, end);
 
             _astarGraph = new WeightedGridGraph(layer);
             _astarSearchPath = _astarGraph.search( start, end );
@@ -56,10 +50,7 @@ namespace Game_Changer__NEW_
             }
             if (Input.leftMouseButtonPressed || Input.rightMouseButtonPressed)
             {
-                //var first = Debug.timeAction(() =>
-                //{
-                //    _breadthSearchPath = _gridGraph.search(start, end);
-                //});
+
                 var second = Debug.timeAction(() =>
                 {
                     _astarSearchPath = _astarGraph.search(start, end);
@@ -71,18 +62,6 @@ namespace Game_Changer__NEW_
 
         public override void render(Graphics graphics, Camera camera)
         {
-            //if (_breadthSearchPath != null)
-            //{
-            //    foreach (var node in _breadthSearchPath)
-            //    {
-            //        var x = node.X * _tilemap.tileWidth + _tilemap.tileWidth * 0.5f;
-            //        var y = node.Y * _tilemap.tileHeight + _tilemap.tileHeight * 0.5f;
-
-            //        //graphics.batcher.drawPixel(x + 1, y + 1, Color.Yellow, 4);
-            //        //System.Diagnostics.Debug.WriteLine(node);
-            //    }
-            //}
-
             if (_astarSearchPath != null)
             {
                 foreach (var node in _astarSearchPath)
@@ -93,10 +72,7 @@ namespace Game_Changer__NEW_
                     graphics.batcher.drawPixel(x - 1, y - 1, Color.Blue, 4);
                     System.Diagnostics.Debug.WriteLine(node);
                 }
-                //System.Diagnostics.Debug.WriteLine(_end);
             }
-
-
 
             while (start.X != end.X)
             {

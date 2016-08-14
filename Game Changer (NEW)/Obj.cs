@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
+using Nez.Tiled;
+using Nez;
+using Nez.Sprites;
 
 namespace Game_Changer__NEW_
 {
