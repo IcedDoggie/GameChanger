@@ -16,15 +16,15 @@ using Nez.Tiled;
 
 namespace Game_Changer__NEW_
 {
-    class army : Component, IUpdatable
+    class Army : Component, IUpdatable
     {
         TiledMap tiledmap;
         Point location;
-        int pointX, pointY;
+        float pointX, pointY;
 
         public float speed = 100f;
 
-        public army(TiledMap ref_tiledmap)
+        public Army(TiledMap ref_tiledmap)
         {
             location = new Point(100,100);
             tiledmap = ref_tiledmap;
@@ -48,20 +48,20 @@ namespace Game_Changer__NEW_
             if (Input.leftMouseButtonPressed)
             {
                 location = tiledmap.worldToTilePosition(Input.mousePosition);
-                pointX = location.X;
-                pointY = location.Y;
-
+                pointX = location.X * 900 / 29;
+                pointY = location.Y * 512 / 15;
+            }
                 System.Diagnostics.Debug.WriteLine(location);
                 if (entity.transform.position.X < pointX)
                     moveDir.X = 1f;
                 else if (entity.transform.position.X > pointX)
                     moveDir.X = -1f;
-                if (entity.transform.position.Y < location.Y)
+                if (entity.transform.position.Y < pointY)
                     moveDir.Y = 1f;
-                else if (entity.transform.position.Y > location.Y)
+                else if (entity.transform.position.Y > pointY)
                     moveDir.Y = -1f;
                 entity.transform.position += moveDir * speed * Time.deltaTime;
-            }
+           // }
                 
         }
         

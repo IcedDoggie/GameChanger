@@ -96,7 +96,7 @@ namespace Game_Changer__NEW_
 
             var armyEntity = myScene.createEntity("armyInMap");
             armyEntity.addComponent(new Sprite<Animation>(Animation.FlyRight, anim));
-            armyEntity.addComponent(new army(tiledmap));
+            armyEntity.addComponent(new Army(tiledmap));
             armyEntity.transform.position = new Vector2(200, 200);
 
             var spriteArmy = armyEntity.getComponent<Sprite<Animation>>();
