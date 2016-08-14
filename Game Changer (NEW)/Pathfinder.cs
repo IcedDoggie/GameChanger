@@ -40,13 +40,13 @@ namespace Game_Changer__NEW_
         {
             if (Input.leftMouseButtonPressed)
             {
-                start = _tilemap.worldToTilePosition(Input.mousePosition);
-                System.Diagnostics.Debug.WriteLine(start);
+                end = _tilemap.worldToTilePosition(Input.mousePosition);
+                //System.Diagnostics.Debug.WriteLine(start);
             }
             if (Input.rightMouseButtonPressed)
             {
-                end = _tilemap.worldToTilePosition(Input.mousePosition);
-                System.Diagnostics.Debug.WriteLine(end);
+                start = _tilemap.worldToTilePosition(Input.mousePosition);
+                //System.Diagnostics.Debug.WriteLine(end);
             }
             if (Input.leftMouseButtonPressed || Input.rightMouseButtonPressed)
             {
@@ -66,23 +66,13 @@ namespace Game_Changer__NEW_
             {
                 foreach (var node in _astarSearchPath)
                 {
-                    var x = node.X * _tilemap.tileWidth + _tilemap.tileWidth * 0.5f;
-                    var y = node.Y * _tilemap.tileHeight + _tilemap.tileHeight * 0.5f;
+                    var x = node.X * _tilemap.tileWidth + _tilemap.tileWidth * 35f;
+                    var y = node.Y * _tilemap.tileHeight + _tilemap.tileHeight * 30f;
 
-                    graphics.batcher.drawPixel(x - 1, y - 1, Color.Blue, 4);
-                    System.Diagnostics.Debug.WriteLine(node);
+                    //graphics.batcher.drawPixel(x - 1, y - 1, Color.Blue, 4);
+                    //System.Diagnostics.Debug.WriteLine(node);
                 }
             }
-
-            while (start.X != end.X)
-            {
-                start.X += 1;
-            }
-            while (start.Y != end.Y)
-            {
-                start.Y += 1;
-            }
-
         }
     }
 }
