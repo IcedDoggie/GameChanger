@@ -26,7 +26,7 @@ namespace Game_Changer__NEW_
         {
             location = new Point(0,0);
             tiledmap = ref_tiledmap;
-            var layer = tiledmap.getLayer<TiledTileLayer>("maplayer");          
+            //var layer = tiledmap.getLayer<TiledTileLayer>("maplayer");          
         }
 
 
@@ -36,6 +36,7 @@ namespace Game_Changer__NEW_
             if (Input.leftMouseButtonPressed)
             {
                 location = tiledmap.worldToTilePosition(Input.mousePosition);
+                
                 //System.Diagnostics.Debug.WriteLine(location);
             }
             

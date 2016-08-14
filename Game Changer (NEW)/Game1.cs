@@ -6,6 +6,7 @@ using Nez.Sprites;
 using Nez.Tiled;
 
 
+
 namespace Game_Changer__NEW_
 {
     /// <summary>
@@ -52,7 +53,7 @@ namespace Game_Changer__NEW_
             var tileSelect = new SelectTile(tiledmap);
             var selectmap = tiledEntity.addComponent(tileSelect);
             tiledMapComponent.setLayersToRender("maplayer");
-            tiledMapComponent.renderLayer = 1;
+            //tiledMapComponent.renderLayer = 0;
 
             var russiaEntity = myScene.createEntity("russiaFact", new Vector2(590,180)); 
             var russiaInMap = content.Load<Texture2D>("russia");
