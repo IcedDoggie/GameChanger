@@ -21,7 +21,7 @@ namespace Game_Changer__NEW_
     {
         TiledMap tiledmap;
         Point location;
-        int pointX, pointY;
+        float pointX, pointY;
 
 
         //public override void onAddedToEntity()
@@ -63,23 +63,25 @@ namespace Game_Changer__NEW_
             entity.transform.position += moveDir * speed * Time.deltaTime;*/
             //if (Input.leftMouseButtonPressed)
             //{
-                location = tiledmap.worldToTilePosition(Input.mousePosition);
-                pointX = location.X;
-                pointY = location.Y;
+            location = tiledmap.worldToTilePosition(Input.mousePosition);
+            pointX = location.X * 900 / 29;
+            pointY = location.Y * 512 / 15;
 
-                System.Diagnostics.Debug.WriteLine(location);
-                if (entity.transform.position.X < pointX)
-                    moveDir.X = 10f;
-                else if (entity.transform.position.X > pointX)
-                    moveDir.X = -100f;
-                if (entity.transform.position.Y < location.Y)
-                    moveDir.Y = 10f;
-                else if (entity.transform.position.Y > location.Y)
-                    moveDir.Y = -100f;
-                entity.transform.position += moveDir * speed * Time.deltaTime;
-            //}
+            System.Diagnostics.Debug.WriteLine(location);
+            if (entity.transform.position.X < pointX)
+                moveDir.X = 10f;
+            else if (entity.transform.position.X > pointX)
+
+                moveDir.X = -1f;
+            if (entity.transform.position.Y < pointY)
+                moveDir.Y = 1f;
+            else if (entity.transform.position.Y > pointY)
+                moveDir.Y = -1f;
+            entity.transform.position += moveDir * speed * Time.deltaTime;
+            // }
+        }
                 
         }
         
-    }
 }
+

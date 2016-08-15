@@ -97,6 +97,7 @@ namespace Game_Changer__NEW_
             var chinaInMap = content.Load<Texture2D>("usa");
             var chinaComponent = chinaEntity.addComponent(new Sprite(chinaInMap));
 
+
             #endregion
 
             #region Pathfinding
@@ -104,22 +105,23 @@ namespace Game_Changer__NEW_
             var pathfinderComponent = pathfinderEntity.addComponent(new Pathfinder(tiledmap));
             #endregion
             #region animating the army
-            ////army testing
 
-            //// var armyEntity = myScene.createEntity("armyFact", new Vector2(700, 239)); 
-            ////var armyInMap = content.Load<Texture2D>("army-png/smallarmy");
-            ////var armyComponent = armyEntity.addComponent(new Sprite(armyInMap));
-            //var armyAtlas = myScene.contentManager.Load<TextureAtlas>("armyAtlas");
-            //var anim = armyAtlas.getSpriteAnimation("flyright");
+            //army testing
+            // var armyEntity = myScene.createEntity("armyFact", new Vector2(700, 239)); 
+            //var armyInMap = content.Load<Texture2D>("army-png/smallarmy");
+            //var armyComponent = armyEntity.addComponent(new Sprite(armyInMap));
+            var armyAtlas = myScene.contentManager.Load<TextureAtlas>("armyAtlas");
+            var anim = armyAtlas.getSpriteAnimation("flyright");
 
-            //var armyEntity = myScene.createEntity("armyInMap");
-            //armyEntity.addComponent(new Sprite<Animation>(Animation.FlyRight, anim));
-            //armyEntity.addComponent(new Army(tiledmap));
-            //armyEntity.transform.position = new Vector2(200, 200);
+            var armyEntity = myScene.createEntity("armyInMap");
+            armyEntity.addComponent(new Sprite<Animation>(Animation.FlyRight, anim));
+            armyEntity.addComponent(new Army(tiledmap));
+            armyEntity.transform.position = new Vector2(200, 200);
 
-            //var spriteArmy = armyEntity.getComponent<Sprite<Animation>>();
-            //spriteArmy.play(Animation.FlyRight);
+            var spriteArmy = armyEntity.getComponent<Sprite<Animation>>();
+            spriteArmy.play(Animation.FlyRight);
             #endregion
+
             Core.scene = myScene;
         }        /// <summary>
                  /// LoadContent will be called once per game and is the place to load
