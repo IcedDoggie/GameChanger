@@ -60,7 +60,7 @@ namespace Game_Changer__NEW_
             //Loading Tile Functionality, like creating coordinates    
             var tileSelect = new SelectTile(tiledmap);
             var selectmap = tiledEntity.addComponent(tileSelect);
-            tiledMapComponent.setLayersToRender("maplayer");
+            //tiledMapComponent.setLayersToRender("maplayer");
             //tiledMapComponent.renderLayer = 0;
             #endregion
             #region for creating Control point

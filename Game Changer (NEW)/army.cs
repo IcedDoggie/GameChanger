@@ -67,7 +67,7 @@ namespace Game_Changer__NEW_
             pointX = location.X * 900 / 29;
             pointY = location.Y * 512 / 15;
 
-            System.Diagnostics.Debug.WriteLine(location);
+            //System.Diagnostics.Debug.WriteLine(location);
             if (entity.transform.position.X < pointX)
                 moveDir.X = 10f;
             else if (entity.transform.position.X > pointX)

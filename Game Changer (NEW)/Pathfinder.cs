@@ -18,42 +18,44 @@ namespace Game_Changer__NEW_
 
         WeightedGridGraph _astarGraph;
         List<Point> _astarSearchPath;
+        UnweightedGridGraph _gridGraph;
 
         TiledMap _tilemap;
-        Point start, end;
+        Point _start, _end;
 
         public Pathfinder(TiledMap tilemap)
         {
-            _tilemap = tilemap;
+            _tilemap = tilemap;         
+            var layer = tilemap.getLayer<TiledTileLayer>("path");
             
-            var layer = tilemap.getLayer<TiledTileLayer>("maplayer");
-            
-            start = new Point(1, 1);
-            end = new Point(10, 10);
+            _start = new Point(1, 1);
+            _end = new Point(10, 10);
 
-            _astarGraph = new WeightedGridGraph(layer);
-            _astarSearchPath = _astarGraph.search( start, end );
-            
+            _gridGraph = new UnweightedGridGraph(layer);
+            _astarSearchPath = _gridGraph.search( _start, _end );
+
+            Debug.drawTextFromBottom = true;
+
         }
 
         void IUpdatable.update()
         {
             if (Input.leftMouseButtonPressed)
             {
-                end = _tilemap.worldToTilePosition(Input.mousePosition);
+                _start = _tilemap.worldToTilePosition(Input.mousePosition);
                 //System.Diagnostics.Debug.WriteLine(start);
             }
             if (Input.rightMouseButtonPressed)
             {
-                start = _tilemap.worldToTilePosition(Input.mousePosition);
-                //System.Diagnostics.Debug.WriteLine(end);
+                _end = _tilemap.worldToTilePosition(Input.mousePosition);
+                System.Diagnostics.Debug.WriteLine(_end);
             }
             if (Input.leftMouseButtonPressed || Input.rightMouseButtonPressed)
             {
 
                 var second = Debug.timeAction(() =>
                 {
-                    _astarSearchPath = _astarGraph.search(start, end);
+                    _astarSearchPath = _gridGraph.search(_start, _end);
                 });
             }
 
@@ -66,11 +68,14 @@ namespace Game_Changer__NEW_
             {
                 foreach (var node in _astarSearchPath)
                 {
-                    var x = node.X * _tilemap.tileWidth + _tilemap.tileWidth * 35f;
-                    var y = node.Y * _tilemap.tileHeight + _tilemap.tileHeight * 30f;
+                    var x = node.X * _tilemap.tileWidth + _tilemap.tileWidth * 0.5f;
+                    var y = node.Y * _tilemap.tileHeight + _tilemap.tileHeight * 0.5f;
+                        
+                    System.Diagnostics.Debug.WriteLine(x);
+                    System.Diagnostics.Debug.WriteLine(y);
 
-                    //graphics.batcher.drawPixel(x - 1, y - 1, Color.Blue, 4);
-                    //System.Diagnostics.Debug.WriteLine(node);
+                    graphics.batcher.drawPixel(x - 1, y - 1, Color.Yellow, 4);
+                    System.Diagnostics.Debug.WriteLine(node);
                 }
             }
         }
