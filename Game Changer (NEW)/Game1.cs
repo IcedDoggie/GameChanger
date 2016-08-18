@@ -68,9 +68,11 @@ namespace Game_Changer__NEW_
             #endregion
             #region for creating Control point
 
-            var russiaEntity = myScene.createEntity("russiaFact", new Vector2(590,180)); 
+            var russiaEntity = myScene.createEntity("russiaFact", new Vector2(596,171)); //(18,5)
             var russiaInMap = content.Load<Texture2D>("russia");
             var russiaComponent = russiaEntity.addComponent(new Sprite(russiaInMap));
+            russiaEntity.addComponent(new Controlpoint(russiaEntity, tiledmap));
+            //System.Diagnostics.Debug.WriteLine(russiaComponent.transform.position.X); 
 
             var usaEntity = myScene.createEntity("usaFact", new Vector2(175, 115));
             var usaInMap = content.Load<Texture2D>("usa");

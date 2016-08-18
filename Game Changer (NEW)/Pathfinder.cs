@@ -48,7 +48,7 @@ namespace Game_Changer__NEW_
             if (Input.rightMouseButtonPressed)
             {
                 _end = _tilemap.worldToTilePosition(Input.mousePosition);
-                System.Diagnostics.Debug.WriteLine(_end);
+                //System.Diagnostics.Debug.WriteLine(_end);
             }
             if (Input.leftMouseButtonPressed || Input.rightMouseButtonPressed)
             {
@@ -71,11 +71,11 @@ namespace Game_Changer__NEW_
                     var x = node.X * _tilemap.tileWidth + _tilemap.tileWidth * 0.5f;
                     var y = node.Y * _tilemap.tileHeight + _tilemap.tileHeight * 0.5f;
                         
-                    System.Diagnostics.Debug.WriteLine(x);
-                    System.Diagnostics.Debug.WriteLine(y);
+                    //System.Diagnostics.Debug.WriteLine(x);
+                    //System.Diagnostics.Debug.WriteLine(y);
 
                     graphics.batcher.drawPixel(x - 1, y - 1, Color.Yellow, 4);
-                    System.Diagnostics.Debug.WriteLine(node);
+                    //System.Diagnostics.Debug.WriteLine(node);
                 }
             }
         }
