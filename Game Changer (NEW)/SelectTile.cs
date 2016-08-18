@@ -36,14 +36,9 @@ namespace Game_Changer__NEW_
             var moveDir = Vector2.Zero;
             if (Input.leftMouseButtonPressed)
             {
-                location = tiledmap.worldToTilePosition(Input.mousePosition);
-
-                
+                location = tiledmap.worldToTilePosition(Input.mousePosition);                
                 //System.Diagnostics.Debug.WriteLine(location);
-
                 System.Diagnostics.Debug.WriteLine(location);
-                
-
             }
             
             

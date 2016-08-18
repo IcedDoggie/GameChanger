@@ -5,6 +5,7 @@ using Nez;
 using Nez.Sprites;
 using Nez.TextureAtlases;
 using Nez.Tiled;
+using Nez.UI;
 
 
 
@@ -44,6 +45,8 @@ namespace Game_Changer__NEW_
             base.Initialize();
             myScene = Scene.createWithDefaultRenderer(Color.CornflowerBlue);
             myScene.setDesignResolution(960, 512, Scene.SceneResolutionPolicy.ExactFit);
+
+
 
             //Create Faction 
             var usaFaction = new Faction("USA");
@@ -121,6 +124,12 @@ namespace Game_Changer__NEW_
             var spriteArmy = armyEntity.getComponent<Sprite<Animation>>();
             spriteArmy.play(Animation.FlyRight);
             #endregion
+            #region Creating the UI
+            var canvas = myScene.createEntity("ui");
+            canvas.addComponent( new UICanvas() );
+            
+            #endregion
+
 
             Core.scene = myScene;
         }        /// <summary>

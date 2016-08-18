@@ -35,9 +35,6 @@ namespace Game_Changer__NEW_
 
 
         //}
-
-
-
         public float speed = 100f;
 
         public Army(TiledMap ref_tiledmap)
@@ -84,7 +81,7 @@ namespace Game_Changer__NEW_
             }
         }
                 
-        }
+}
         
 
 

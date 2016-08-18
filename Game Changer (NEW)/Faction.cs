@@ -17,7 +17,6 @@ namespace Game_Changer__NEW_
             goldCount = 0;
             goldPerSecond = 0;
             luxuryCount = 0;
-
         }
     }
 }

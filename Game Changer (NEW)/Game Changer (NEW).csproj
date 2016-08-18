@@ -39,7 +39,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Army.cs" />
-    <Compile Include="Controlpoint.cs" />
     <Compile Include="Faction.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Obj.cs" />
@@ -47,6 +46,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectTile.cs" />
+    <Compile Include="UserInterface.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OpenTK">
