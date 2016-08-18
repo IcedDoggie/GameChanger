@@ -64,12 +64,15 @@ namespace Game_Changer__NEW_
             if (Input.leftMouseButtonPressed)
             {
                 location = tiledmap.worldToTilePosition(Input.mousePosition);
-            pointX = location.X * 900 / 29;
-            pointY = location.Y * 512 / 15;
+
+                pointX = location.X * 900 / 29;
+                pointY = location.Y * 512 / 15;
+            }
+
 
             //System.Diagnostics.Debug.WriteLine(location);
             if (entity.transform.position.X < pointX)
-                moveDir.X = 10f;
+                moveDir.X = 1f;
             else if (entity.transform.position.X > pointX)
 
                 moveDir.X = -1f;
@@ -83,5 +86,5 @@ namespace Game_Changer__NEW_
                 
         }
         
-}
+
 
