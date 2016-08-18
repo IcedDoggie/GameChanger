@@ -61,9 +61,9 @@ namespace Game_Changer__NEW_
             else if (Input.isKeyDown(Keys.Down))
                 moveDir.Y = 1f;
             entity.transform.position += moveDir * speed * Time.deltaTime;*/
-            //if (Input.leftMouseButtonPressed)
-            //{
-            location = tiledmap.worldToTilePosition(Input.mousePosition);
+            if (Input.leftMouseButtonPressed)
+            {
+                location = tiledmap.worldToTilePosition(Input.mousePosition);
             pointX = location.X * 900 / 29;
             pointY = location.Y * 512 / 15;
 
@@ -78,7 +78,7 @@ namespace Game_Changer__NEW_
             else if (entity.transform.position.Y > pointY)
                 moveDir.Y = -1f;
             entity.transform.position += moveDir * speed * Time.deltaTime;
-            // }
+            }
         }
                 
         }

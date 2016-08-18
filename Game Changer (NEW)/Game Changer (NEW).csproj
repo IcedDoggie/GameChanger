@@ -39,7 +39,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Army.cs" />
-    <Compile Include="Cursor.cs" />
     <Compile Include="Controlpoint.cs" />
     <Compile Include="Faction.cs" />
     <Compile Include="Game1.cs" />
