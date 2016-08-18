@@ -61,15 +61,16 @@ namespace Game_Changer__NEW_
             else if (Input.isKeyDown(Keys.Down))
                 moveDir.Y = 1f;
             entity.transform.position += moveDir * speed * Time.deltaTime;*/
-            //if (Input.leftMouseButtonPressed)
-            //{
-            location = tiledmap.worldToTilePosition(Input.mousePosition);
-            pointX = location.X * 900 / 29;
-            pointY = location.Y * 512 / 15;
+            if (Input.leftMouseButtonPressed)
+            {
+                location = tiledmap.worldToTilePosition(Input.mousePosition);
+                pointX = location.X * 900 / 29;
+                pointY = location.Y * 512 / 15;
+            }
 
             //System.Diagnostics.Debug.WriteLine(location);
             if (entity.transform.position.X < pointX)
-                moveDir.X = 10f;
+                moveDir.X = 1f;
             else if (entity.transform.position.X > pointX)
 
                 moveDir.X = -1f;
