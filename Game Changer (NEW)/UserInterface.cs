@@ -12,35 +12,24 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Game_Changer__NEW_
 {
-    class UserInterface : Scene, IFinalRenderDelegate
+    class UserInterface : Component, IUpdatable
     {
         public UICanvas canvas;
-        public Scene scene
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
 
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public void handleFinalRender(Color letterboxColor, RenderTarget2D source, Rectangle finalRenderDestinationRect, SamplerState samplerState)
+        public void update()
         {
             throw new NotImplementedException();
         }
 
-        public void onAddedToScene()
+        void createUI()
         {
-            throw new NotImplementedException();
-        }
+            var uiCanvas = entity.scene.createEntity("sprite-light-ui").addComponent( new UICanvas() );
+            var table = uiCanvas.stage.addElement(new Table());
+            //table.setFillParent(true).left().top().padLeft(10).padTop(30);
 
-        public void onSceneBackBufferSizeChanged(int newWidth, int newHeight)
-        {
-            throw new NotImplementedException();
+            table.row().setPadTop(20).setAlign(Align.left);
+
+           
         }
     }
 }

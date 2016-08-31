@@ -127,9 +127,12 @@ namespace Game_Changer__NEW_
             spriteArmy.play(Animation.FlyRight);
             #endregion
             #region Creating the UI
-            var canvas = myScene.createEntity("ui");
-            canvas.addComponent( new UICanvas() );
-            
+            //var canvas = new UserInterface();
+            var stats = myScene.createEntity("stats");
+            stats.addComponent(new Text(Graphics.instance.bitmapFont, "abc", new Vector2(10, 10), Color.White));
+              
+
+
             #endregion
 
 
