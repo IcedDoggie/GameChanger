@@ -83,26 +83,30 @@ namespace Game_Changer__NEW_
             var canadaEntity = myScene.createEntity("canadaFact", new Vector2(232, 171)); //(7,5)
             var canadaInMap = content.Load<Texture2D>("usa");
             var canadaComponent = canadaEntity.addComponent(new Sprite(canadaInMap));
+            var canadaCP = canadaEntity.addComponent(new Controlpoint(canadaEntity, tiledmap));
+            canadaCP.factionName = "Canada";
 
-            var susaEntity = myScene.createEntity("susaFact", new Vector2(232, 239));//(7,7)
-            var susaInMap = content.Load<Texture2D>("usa");
-            var susaComponent = susaEntity.addComponent(new Sprite(susaInMap));
+            // note: currently comment it out to ease proof of concept :)
 
-            var greenlandEntity = myScene.createEntity("greenlandFact", new Vector2(397, 102)); //(12,3)
-            var greenlandInMap = content.Load<Texture2D>("usa");
-            var greenlandComponent = greenlandEntity.addComponent(new Sprite(greenlandInMap));
+            //var susaEntity = myScene.createEntity("susaFact", new Vector2(232, 239));//(7,7)
+            //var susaInMap = content.Load<Texture2D>("usa");
+            //var susaComponent = susaEntity.addComponent(new Sprite(susaInMap));
 
-            var brazilEntity = myScene.createEntity("brazilFact", new Vector2(331, 375)); //(10,11)
-            var brazilInMap = content.Load<Texture2D>("usa");
-            var brazilComponent = brazilEntity.addComponent(new Sprite(brazilInMap));
+            //var greenlandEntity = myScene.createEntity("greenlandFact", new Vector2(397, 102)); //(12,3)
+            //var greenlandInMap = content.Load<Texture2D>("usa");
+            //var greenlandComponent = greenlandEntity.addComponent(new Sprite(greenlandInMap));
 
-            var australiaEntity = myScene.createEntity("australiaFact", new Vector2(794, 410)); //(24,12)
-            var australiaInMap = content.Load<Texture2D>("usa");
-            var australiaComponent = australiaEntity.addComponent(new Sprite(australiaInMap));
+            //var brazilEntity = myScene.createEntity("brazilFact", new Vector2(331, 375)); //(10,11)
+            //var brazilInMap = content.Load<Texture2D>("usa");
+            //var brazilComponent = brazilEntity.addComponent(new Sprite(brazilInMap));
 
-            var chinaEntity = myScene.createEntity("chinaFact", new Vector2(695, 239)); //(21,7)
-            var chinaInMap = content.Load<Texture2D>("usa");
-            var chinaComponent = chinaEntity.addComponent(new Sprite(chinaInMap));
+            //var australiaEntity = myScene.createEntity("australiaFact", new Vector2(794, 410)); //(24,12)
+            //var australiaInMap = content.Load<Texture2D>("usa");
+            //var australiaComponent = australiaEntity.addComponent(new Sprite(australiaInMap));
+
+            //var chinaEntity = myScene.createEntity("chinaFact", new Vector2(695, 239)); //(21,7)
+            //var chinaInMap = content.Load<Texture2D>("usa");
+            //var chinaComponent = chinaEntity.addComponent(new Sprite(chinaInMap));
 
 
             #endregion

@@ -36,6 +36,7 @@ namespace Game_Changer__NEW_
 
         //for text update
         public Text statsText;
+        public Text hpText;
         public const float updateInterval = 250;
         public Timer statsTimer;
 
@@ -55,24 +56,19 @@ namespace Game_Changer__NEW_
         }
         void IUpdatable.update()
         {
+            // this code is for shifting the text to top-left corner
             tiledX = tiledmap.widthInPixels;
             tiledY = tiledmap.heightInPixels;
-
             Vector2 a = cpEntity.transform.position;
-
             int aTemp = tiledmap.worldToTilePositionX(a.X);
             int bTemp = tiledmap.worldToTilePositionY(a.Y);
             tiledTempX = aTemp * 35;
             tiledTempY = bTemp * 30;
-
-
-
             tiledX = (tiledX - tiledmap.widthInPixels) - tiledTempX + 35;
             tiledY = (tiledY - tiledmap.heightInPixels) - tiledTempY;
+            //end
 
-            System.Diagnostics.Debug.WriteLine(tiledX);
-            System.Diagnostics.Debug.WriteLine(tiledY);
-
+            //code below is for draw text :)
             entityLocation = tiledmap.worldToTilePosition(cpEntity.transform.position);
             mousePoint = tiledmap.worldToTilePosition(Input.mousePosition);
             //System.Diagnostics.Debug.WriteLine(entityLocation);
@@ -84,13 +80,16 @@ namespace Game_Changer__NEW_
                 this.factionName = tempEntity.factionName;
                 System.Diagnostics.Debug.WriteLine(this.factionName);
                 statsText = new Text(Graphics.instance.bitmapFont, this.factionName, new Vector2(tiledX, tiledY), Color.LightGoldenrodYellow);
-                cpEntity.addComponent(statsText);     
+                hpText = new Text(Graphics.instance.bitmapFont, this.cphp.ToString(), new Vector2(tiledX, tiledY+30), Color.LightGoldenrodYellow);
+                cpEntity.addComponent(statsText);
+                cpEntity.addComponent(hpText);
                 flagForComponent = true;
             }
             else if(mousePoint != entityLocation && flagForComponent == true )
             {
                 flagForComponent = false;
-                cpEntity.removeComponent(statsText);   
+                cpEntity.removeComponent(statsText);
+                cpEntity.removeComponent(hpText);
             }
             
         }
