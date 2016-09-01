@@ -130,8 +130,7 @@ namespace Game_Changer__NEW_
             #endregion
             #region Creating the UI
             //var canvas = new UserInterface();
-            var stats = myScene.createEntity("stats");
-            stats.addComponent(new Text(Graphics.instance.bitmapFont, cpName, new Vector2(10, 10), Color.White));
+
 
 
             //stats.addComponent(new Text(Graphics.instance.bitmapFont, "abc", new Vector2(10, 10), Color.White));

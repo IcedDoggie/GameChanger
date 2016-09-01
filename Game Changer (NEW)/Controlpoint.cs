@@ -27,6 +27,10 @@ namespace Game_Changer__NEW_
         TiledMap tiledmap;
         Point entityLocation;
         Point mousePoint;
+        public int tiledX;
+        public int tiledY;
+        public bool flagForComponent = false;
+        
 
         //for text update
         public Text statsText;
@@ -42,24 +46,39 @@ namespace Game_Changer__NEW_
 
             entityLocation = new Point(0, 0);
             mousePoint = new Point(0, 0);
-            tiledmap = ref_tiledmap;         
+            tiledmap = ref_tiledmap;
+
+            tiledX = tiledmap.tileWidth;
+            tiledY = tiledmap.tileHeight;
+
+            tiledX = tiledX - tiledmap.tileWidth;
+            tiledY = tiledY - tiledmap.tileHeight;
         }
         void IUpdatable.update()
         {
             entityLocation = tiledmap.worldToTilePosition(cpEntity.transform.position);
             mousePoint = tiledmap.worldToTilePosition(Input.mousePosition);
             //System.Diagnostics.Debug.WriteLine(entityLocation);
-            statsText = new Text(Graphics.instance.bitmapFont, "abc", new Vector2(-160, -100), Color.LightGoldenrodYellow);
-            this.entity.addComponent(statsText);
             
-            if(mousePoint == entityLocation)
+            if(mousePoint == entityLocation && flagForComponent == false)
             {
                 //System.Diagnostics.Debug.WriteLine("CP Found");
+                var tempEntity = this.entity.getComponent<Controlpoint>();
+                this.factionName = tempEntity.factionName;
+                System.Diagnostics.Debug.WriteLine(this.factionName);
+                statsText = new Text(Graphics.instance.bitmapFont, this.factionName, new Vector2(tiledX, tiledY), Color.LightGoldenrodYellow);
+                cpEntity.addComponent(statsText);     
+                flagForComponent = true;
             }
-            else
+            else if(mousePoint != entityLocation && flagForComponent == true )
             {
+                flagForComponent = false;
+                cpEntity.removeComponent(statsText);   
+                //cpEntity.removeComponent(statsText);
+                //this.factionName = "";
                 //System.Diagnostics.Debug.WriteLine("CP Not Found");
             }
+            
         }
 
         //void statsUpdate()
