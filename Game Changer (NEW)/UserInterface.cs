@@ -24,10 +24,11 @@ namespace Game_Changer__NEW_
         void createUI()
         {
             var uiCanvas = entity.scene.createEntity("sprite-light-ui").addComponent( new UICanvas() );
-            var table = uiCanvas.stage.addElement(new Table());
-            //table.setFillParent(true).left().top().padLeft(10).padTop(30);
+            
+            //var table = uiCanvas.stage.addElement(new Table());
+            ////table.setFillParent(true).left().top().padLeft(10).padTop(30);
 
-            table.row().setPadTop(20).setAlign(Align.left);
+            //table.row().setPadTop(20).setAlign(Align.left);
 
            
         }

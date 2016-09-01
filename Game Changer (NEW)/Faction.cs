@@ -12,11 +12,13 @@ namespace Game_Changer__NEW_
         public int goldPerSecond;
         public int luxuryCount;
         public string factionName;
+        public int CPhp;
         public Faction(string factionName)
         {
-            goldCount = 0;
+            goldCount = 100;
             goldPerSecond = 0;
             luxuryCount = 0;
+            CPhp = 20;
         }
     }
 }

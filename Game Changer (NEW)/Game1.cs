@@ -7,8 +7,6 @@ using Nez.TextureAtlases;
 using Nez.Tiled;
 using Nez.UI;
 
-
-
 namespace Game_Changer__NEW_
 {
     /// <summary>
@@ -25,7 +23,9 @@ namespace Game_Changer__NEW_
         
         SpriteBatch spriteBatch;
         private Scene myScene;
-       
+        Point mousePoint;
+        public string cpName = "";
+        
 
         public Game1() : base()
         {
@@ -45,7 +45,6 @@ namespace Game_Changer__NEW_
             base.Initialize();
             myScene = Scene.createWithDefaultRenderer(Color.CornflowerBlue);
             myScene.setDesignResolution(960, 512, Scene.SceneResolutionPolicy.ExactFit);
-
 
 
             //Create Faction 
@@ -71,12 +70,15 @@ namespace Game_Changer__NEW_
             var russiaEntity = myScene.createEntity("russiaFact", new Vector2(596,171)); //(18,5)
             var russiaInMap = content.Load<Texture2D>("russia");
             var russiaComponent = russiaEntity.addComponent(new Sprite(russiaInMap));
-            russiaEntity.addComponent(new Controlpoint(russiaEntity, tiledmap));
+            var russiaCP = russiaEntity.addComponent(new Controlpoint(russiaEntity, tiledmap));
+            russiaCP.factionName = "Russia";
             //System.Diagnostics.Debug.WriteLine(russiaComponent.transform.position.X); 
 
             var usaEntity = myScene.createEntity("usaFact", new Vector2(175, 115));
             var usaInMap = content.Load<Texture2D>("usa");
             var usaComponent = usaEntity.addComponent(new Sprite(usaInMap));
+            var usaCP = usaEntity.addComponent(new Controlpoint(usaEntity, tiledmap));
+            usaCP.factionName = "USA";
 
             var canadaEntity = myScene.createEntity("canadaFact", new Vector2(232, 171)); //(7,5)
             var canadaInMap = content.Load<Texture2D>("usa");
@@ -129,8 +131,12 @@ namespace Game_Changer__NEW_
             #region Creating the UI
             //var canvas = new UserInterface();
             var stats = myScene.createEntity("stats");
-            stats.addComponent(new Text(Graphics.instance.bitmapFont, "abc", new Vector2(10, 10), Color.White));
-              
+            stats.addComponent(new Text(Graphics.instance.bitmapFont, cpName, new Vector2(10, 10), Color.White));
+
+
+            //stats.addComponent(new Text(Graphics.instance.bitmapFont, "abc", new Vector2(10, 10), Color.White));
+            //stats.addComponent(new Text(Graphics.instance.bitmapFont, "abc", new Vector2(10, 10), Color.White));
+
 
 
             #endregion
@@ -140,7 +146,6 @@ namespace Game_Changer__NEW_
         }        /// <summary>
                  /// LoadContent will be called once per game and is the place to load
                  /// all of your content.
-
         #region Not sure whether is it still needed or not
 
         /// </summary>
@@ -183,10 +188,10 @@ namespace Game_Changer__NEW_
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            
+
 
             // TODO: Add your drawing code here
-
+            
             base.Draw(gameTime);
         }
         #endregion

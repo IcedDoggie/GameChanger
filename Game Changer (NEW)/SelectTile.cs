@@ -38,7 +38,7 @@ namespace Game_Changer__NEW_
             {
                 location = tiledmap.worldToTilePosition(Input.mousePosition);                
                 //System.Diagnostics.Debug.WriteLine(location);
-                System.Diagnostics.Debug.WriteLine(location);
+                //System.Diagnostics.Debug.WriteLine(location);
             }
             
             
