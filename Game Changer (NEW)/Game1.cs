@@ -117,33 +117,18 @@ namespace Game_Changer__NEW_
             #endregion
             #region animating the army
 
-            //army testing
-            // var armyEntity = myScene.createEntity("armyFact", new Vector2(700, 239)); 
-            //var armyInMap = content.Load<Texture2D>("army-png/smallarmy");
-            //var armyComponent = armyEntity.addComponent(new Sprite(armyInMap));
             var armyAtlas = myScene.contentManager.Load<TextureAtlas>("armyAtlas");
             var anim = armyAtlas.getSpriteAnimation("flyright");
 
             var armyEntity = myScene.createEntity("armyInMap");
-            armyEntity.addComponent(new Sprite<Animation>(Animation.FlyRight, anim));
-            armyEntity.addComponent(new Army(tiledmap));
-            armyEntity.transform.position = new Vector2(200, 200);
+            var armyComponent = armyEntity.addComponent(new Army(tiledmap, armyEntity, anim));
+            //var armyAnimation = armyEntity.addComponent(new Sprite<Animation>(Animation.FlyRight, anim));
+            //armyEntity.addComponent(new Army(tiledmap));
+            //armyEntity.transform.position = new Vector2(200, 200);
 
-            var spriteArmy = armyEntity.getComponent<Sprite<Animation>>();
+            //var spriteArmy = armyEntity.getComponent<Sprite<Animation>>();
             //spriteArmy.play(Animation.FlyRight);
             #endregion
-            #region Creating the UI
-            //var canvas = new UserInterface();
-
-
-
-            //stats.addComponent(new Text(Graphics.instance.bitmapFont, "abc", new Vector2(10, 10), Color.White));
-            //stats.addComponent(new Text(Graphics.instance.bitmapFont, "abc", new Vector2(10, 10), Color.White));
-
-
-
-            #endregion
-
 
             Core.scene = myScene;
         }        /// <summary>
