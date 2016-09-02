@@ -32,8 +32,7 @@ namespace Game_Changer__NEW_
         private SpriteAnimation armyAnim;
 
         public Army(TiledMap ref_tiledmap, Entity armyEnt, SpriteAnimation anim)
-        {
-            location = new Point(100,100);
+        {   
             tiledmap = ref_tiledmap;
             var layer = tiledmap.getLayer<TiledTileLayer>("maplayer");
             armyEntity = armyEnt;
@@ -49,10 +48,12 @@ namespace Game_Changer__NEW_
             {
                 numberOfClicks += 1;
                 location = tiledmap.worldToTilePosition(Input.mousePosition);
-                
+                //System.Diagnostics.Debug.WriteLine(location.X);
+                //System.Diagnostics.Debug.WriteLine(location.Y);
                 //origin
                 originPointX = location.X * 900 / 29;
                 originPointY = location.Y * 512 / 15;
+                //System.Diagnostics.Debug.WriteLine(tiledmap.widthInPixels);
             }
 
             else if (Input.leftMouseButtonReleased && numberOfClicks == 1)
@@ -60,6 +61,7 @@ namespace Game_Changer__NEW_
                 //numberOfClicks = 0;
                 location = tiledmap.worldToTilePosition(Input.mousePosition);
                 armyEntity.addComponent(armyAnimation);
+
                 armyEntity.transform.position = new Vector2(originPointX, originPointY);
                 //destination
                 pointX = location.X * 900 / 29;
@@ -70,12 +72,14 @@ namespace Game_Changer__NEW_
             {
                 moveDir.X = 1f;
                 originPointX += moveDir.X;
+                System.Diagnostics.Debug.WriteLine("pong!");
             }
 
             else if (originPointX > pointX)
             {
                 moveDir.X = -1f;
-                originPointX -= moveDir.X;
+                originPointX += moveDir.X;
+                System.Diagnostics.Debug.WriteLine("ping!");
             }
 
             if (originPointY < pointY)
@@ -87,17 +91,29 @@ namespace Game_Changer__NEW_
             else if (originPointY > pointY)
             {
                 moveDir.Y = -1f;
-                originPointY -= moveDir.Y;
+                originPointY += moveDir.Y;
             }
 
-            System.Diagnostics.Debug.WriteLine(originPointX);
-            System.Diagnostics.Debug.WriteLine(pointX);
+            //System.Diagnostics.Debug.WriteLine(originPointX);
+            //System.Diagnostics.Debug.WriteLine(pointX);
             // This code is to remove the bird once it reaches destination
-            if (originPointX == pointX && originPointY == pointY && numberOfClicks == 1)
+            if (  originPointX == pointX && originPointY == pointY && numberOfClicks == 1 )
             {
                 numberOfClicks = 0;
                 armyEntity.removeComponent(armyAnimation);
+                //originPointX = 0;
+                //originPointY = 0;
             }
+
+            //System.Diagnostics.Debug.Write(originPointX);
+            //System.Diagnostics.Debug.Write(" ");
+            //System.Diagnostics.Debug.Write(pointX);
+            //System.Diagnostics.Debug.Write(" ");
+
+            //System.Diagnostics.Debug.Write(originPointY);
+            //System.Diagnostics.Debug.Write(" ");
+            //System.Diagnostics.Debug.Write(pointY);
+            //System.Diagnostics.Debug.Write(" ");            
 
             armyEntity.transform.position += moveDir * speed * Time.deltaTime;
         }
