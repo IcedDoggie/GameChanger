@@ -25,8 +25,7 @@ namespace Game_Changer__NEW_
         public SelectTile(TiledMap ref_tiledmap)
         {
             location = new Point(0,0);
-            tiledmap = ref_tiledmap;
-            //var layer = tiledmap.getLayer<TiledTileLayer>("maplayer");          
+            tiledmap = ref_tiledmap;       
         }
 
 

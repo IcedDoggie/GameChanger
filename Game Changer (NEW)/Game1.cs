@@ -130,7 +130,7 @@ namespace Game_Changer__NEW_
             armyEntity.transform.position = new Vector2(200, 200);
 
             var spriteArmy = armyEntity.getComponent<Sprite<Animation>>();
-            spriteArmy.play(Animation.FlyRight);
+            //spriteArmy.play(Animation.FlyRight);
             #endregion
             #region Creating the UI
             //var canvas = new UserInterface();
