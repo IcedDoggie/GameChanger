@@ -43,12 +43,6 @@ namespace Game_Changer__NEW_
             armyEntity = armyEnt;
             tempArmyEntity = armyEntity; 
             armyAnim = anim;
-            //armyEntity.getComponent
-           // Vector2 tempVec = new Vector2(200, 200);
-           // var dummyTest = new tempScene.createProjectiles(tempVec, tiledmap, armyAnim);
-           // var tempDummy = tempScene.createProjectiles(tempVec, tiledmap, armyAnim);
-
-            System.Diagnostics.Debug.WriteLine("Oh no....");
             
         }
 
@@ -59,13 +53,8 @@ namespace Game_Changer__NEW_
 
         public void update()
         {
-            System.Diagnostics.Debug.WriteLine("I am running..");
-            //armyEntity.enabled = true;
-
             Vector2 moveDir = Vector2.Zero;
             var armyAnimation = new Sprite<Animation>(Animation.FlyRight, armyAnim);
-            //var spriteArmy = armyEntity.getComponent<Sprite<Animation>>();
-            //spriteArmy.play(Animation.FlyRight);
             
             // This code is to direct which coordinate the bird goes
             if (Input.leftMouseButtonReleased && numberOfClicks == 0)
@@ -94,8 +83,6 @@ namespace Game_Changer__NEW_
 
                 var animationDummy = armyEntity.addComponent(new Sprite<Animation>(Animation.FlyRight, armyAnim));
                 var armyComponent = armyEntity.addComponent(new Army(tiledmap, armyEntity, armyAnim));
-                System.Diagnostics.Debug.WriteLine("Congratulations :)");
-
                     
             }
             // This code is to maneuver the bird.
@@ -133,8 +120,6 @@ namespace Game_Changer__NEW_
                 numberOfClicks = 0;
                 entityDestroyFlag = true;
                 armyEntity.removeAllComponents();
-                System.Diagnostics.Debug.WriteLine("Ping!");
-               
             }
 
 
@@ -143,10 +128,8 @@ namespace Game_Changer__NEW_
                 var animationDummy = armyEntity.addComponent(new Sprite<Animation>(Animation.FlyRight, armyAnim));
                 var armyComponent = armyEntity.addComponent(new Army(tiledmap, armyEntity, armyAnim));
                 armyComponent.transform.position = new Vector2(-100, -100);
-                System.Diagnostics.Debug.WriteLine("Component Added Back");
             }
             armyEntity.transform.position += moveDir * speed * Time.deltaTime;
-            System.Diagnostics.Debug.WriteLine("I am stilllll running..");
         }
     }                
 }

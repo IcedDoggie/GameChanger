@@ -142,15 +142,15 @@ namespace Game_Changer__NEW_
             Core.scene = myScene;
         }
         
-        public Entity createProjectiles( Vector2 position, TiledMap tempTiledMap, SpriteAnimation tempAnim )
-        {
-            var armyEntity = myScene.createEntity("armyInMap");
-            var armyComponent = armyEntity.addComponent(new Army(tempTiledMap, armyEntity, tempAnim ));
-            //armyEntity.addComponent(new Army(tempTiledMap, armyEntity, tempAnim));
-            System.Diagnostics.Debug.WriteLine("Ping");
-            return armyEntity;
+        //public Entity createProjectiles( Vector2 position, TiledMap tempTiledMap, SpriteAnimation tempAnim )
+        //{
+        //    var armyEntity = myScene.createEntity("armyInMap");
+        //    var armyComponent = armyEntity.addComponent(new Army(tempTiledMap, armyEntity, tempAnim ));
+        //    //armyEntity.addComponent(new Army(tempTiledMap, armyEntity, tempAnim));
+        //    System.Diagnostics.Debug.WriteLine("Ping");
+        //    return armyEntity;
             
-        }
+        //}
         /// <summary>
                  /// LoadContent will be called once per game and is the place to load
                  /// all of your content.
