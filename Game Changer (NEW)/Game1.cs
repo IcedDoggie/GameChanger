@@ -23,6 +23,7 @@ namespace Game_Changer__NEW_
         
         SpriteBatch spriteBatch;
         private Scene myScene;
+        MouseState mouse;
         Point mousePoint;
         public string cpName = "";
         
@@ -119,19 +120,38 @@ namespace Game_Changer__NEW_
 
             var armyAtlas = myScene.contentManager.Load<TextureAtlas>("armyAtlas");
             var anim = armyAtlas.getSpriteAnimation("flyright");
+            //var armyTest = new Army(tiledmap, russiaEntity, anim);
 
-            var armyEntity = myScene.createEntity("armyInMap");
-            var armyComponent = armyEntity.addComponent(new Army(tiledmap, armyEntity, anim));
-            //var armyAnimation = armyEntity.addComponent(new Sprite<Animation>(Animation.FlyRight, anim));
-            //armyEntity.addComponent(new Army(tiledmap));
-            //armyEntity.transform.position = new Vector2(200, 200);
+            
+
+            //Vector2 tempVec = new Vector2(200, 200);
+            //Game1 tempScene = new Game1();
+            //tempScene.createProjectiles(tempVec, tiledmap, anim);
+
+            var armyEntity = myScene.createEntity("dummyArmy", new Vector2(232, 171));
+            
+            var armyAnimation = armyEntity.addComponent(new Sprite<Animation>(Animation.FlyRight, anim));
+           
+            armyEntity.addComponent(new Army(tiledmap, armyEntity, anim));
+            armyEntity.transform.position = new Vector2(200, 200);
 
             //var spriteArmy = armyEntity.getComponent<Sprite<Animation>>();
             //spriteArmy.play(Animation.FlyRight);
             #endregion
-
+            
             Core.scene = myScene;
-        }        /// <summary>
+        }
+        
+        public Entity createProjectiles( Vector2 position, TiledMap tempTiledMap, SpriteAnimation tempAnim )
+        {
+            var armyEntity = myScene.createEntity("armyInMap");
+            var armyComponent = armyEntity.addComponent(new Army(tempTiledMap, armyEntity, tempAnim ));
+            //armyEntity.addComponent(new Army(tempTiledMap, armyEntity, tempAnim));
+            System.Diagnostics.Debug.WriteLine("Ping");
+            return armyEntity;
+            
+        }
+        /// <summary>
                  /// LoadContent will be called once per game and is the place to load
                  /// all of your content.
         #region Not sure whether is it still needed or not
