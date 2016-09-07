@@ -37,8 +37,11 @@ namespace Game_Changer__NEW_
         //for text update
         public Text statsText;
         public Text hpText;
+        public Text luxuryText;
         public const float updateInterval = 250;
         public Timer statsTimer;
+        public string luxuryExist;
+
 
 
         public Controlpoint(Entity CP, TiledMap ref_tiledmap)
@@ -46,13 +49,11 @@ namespace Game_Changer__NEW_
             cpEntity = CP;
             controlPointID = CP.name;
             cphp = 20;
+            
 
             entityLocation = new Point(0, 0);
             mousePoint = new Point(0, 0);
             tiledmap = ref_tiledmap;
-
-
-
         }
         void IUpdatable.update()
         {
@@ -81,8 +82,10 @@ namespace Game_Changer__NEW_
                 System.Diagnostics.Debug.WriteLine(this.factionName);
                 statsText = new Text(Graphics.instance.bitmapFont, this.factionName, new Vector2(tiledX, tiledY), Color.LightGoldenrodYellow);
                 hpText = new Text(Graphics.instance.bitmapFont, this.cphp.ToString(), new Vector2(tiledX, tiledY+30), Color.LightGoldenrodYellow);
+                luxuryText = new Text(Graphics.instance.bitmapFont, this.luxuryExist, new Vector2(tiledX, tiledY + 60), Color.LightGoldenrodYellow);
                 cpEntity.addComponent(statsText);
                 cpEntity.addComponent(hpText);
+                cpEntity.addComponent(luxuryText);
                 flagForComponent = true;
             }
             else if(mousePoint != entityLocation && flagForComponent == true )
@@ -90,6 +93,7 @@ namespace Game_Changer__NEW_
                 flagForComponent = false;
                 cpEntity.removeComponent(statsText);
                 cpEntity.removeComponent(hpText);
+                cpEntity.removeComponent(luxuryText);
             }
             
         }

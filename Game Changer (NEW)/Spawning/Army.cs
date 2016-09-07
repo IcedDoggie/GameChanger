@@ -23,7 +23,7 @@ namespace Game_Changer__NEW_
         Point location;
         float pointX, pointY;
 
-        public float speed = 50f;
+        public float speed = 100f;
 
         //Variables for spawning
         private int numberOfClicks = 0;
@@ -68,7 +68,6 @@ namespace Game_Changer__NEW_
                 originPointX = location.X * 900 / 29;
                 originPointY = location.Y * 512 / 15;
                 //System.Diagnostics.Debug.WriteLine(tiledmap.widthInPixels);
-
             }
                 
             else if ( Input.leftMouseButtonReleased && numberOfClicks == 1 )
@@ -82,7 +81,7 @@ namespace Game_Changer__NEW_
 
                 //armyEntity.addComponent(armyAnimation);
                 //System.Diagnostics.Debug.WriteLine("2");
-                var tempVec = new Vector2(originPointX, originPointY);
+                //armyEntity.transform.position = new Vector2(originPointX, originPointY);
                 //destination
                 pointX = location.X * 900 / 29;
                 pointY = location.Y * 512 / 15;
@@ -91,7 +90,7 @@ namespace Game_Changer__NEW_
                 //var animationDummy = armyEntity.addComponent(new Sprite<Animation>(Animation.FlyRight, armyAnim));
                 //var armyComponent = armyEntity.addComponent(new Army(tiledmap, armyEntity, armyAnim));
                 System.Diagnostics.Debug.WriteLine("item created");
-                var armyComponent = createProjectiles(tempVec, tiledmap, armyAnim);
+                //var armyComponent = createProjectiles(tiledmap, armyAnim);
                 armyEntity.addComponent<Component>(armyComponent);
 
             }
@@ -127,7 +126,7 @@ namespace Game_Changer__NEW_
             }
             #endregion
             // This code is to remove the bird once it reaches destination
-            if (  originPointX == pointX && originPointY == pointY && numberOfClicks == 1 )
+            if (  originPointX == pointX && originPointY == pointY )
             {
                 numberOfClicks = 0;
                 entityDestroyFlag = true;
@@ -136,8 +135,8 @@ namespace Game_Changer__NEW_
                 //originPointY = 0;
                 //pointX = 0;
                 //pointY = 0;
-                //armyEntity.removeComponent<Component>();
                 armyEntity.removeComponent<Component>();
+                
             }
   
 
@@ -147,17 +146,17 @@ namespace Game_Changer__NEW_
                 //var armyComponent = armyEntity.addComponent(new Army(tiledmap, armyEntity, armyAnim));
                 //armyComponent.transform.position = new Vector2(-100, -100);
                 entityDestroyFlag = false;
-                var tempVec = new Vector2(0, 0);
-                createProjectiles(tempVec, tiledmap, armyAnim);
+                var tempVec = new Vector2(-100, -100);
+                //createProjectiles(tempVec, tiledmap, armyAnim);
             }
-            armyEntity.transform.position += moveDir * speed * Time.deltaTime;
+            //armyEntity.transform.position += moveDir * speed * Time.deltaTime;
             
         }
 
-        public Component createProjectiles(Vector2 position, TiledMap tempTiledMap, SpriteAnimation tempAnim)
+        public Component createProjectiles(TiledMap tempTiledMap, SpriteAnimation tempAnim)
         {
             var armyComponent = armyEntity.addComponent(new Army(tempTiledMap, armyEntity, tempAnim));
-            armyComponent.transform.position = position;
+            armyComponent.transform.position = (Input.mousePosition);
             return armyComponent;
         }
 

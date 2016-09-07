@@ -48,10 +48,6 @@ namespace Game_Changer__NEW_
             myScene.setDesignResolution(960, 512, Scene.SceneResolutionPolicy.ExactFit);
 
 
-            //Create Faction 
-            var usaFaction = new Faction("USA");
-            var russiaFaction = new Faction("Russia");
-
             //Create Control Point
 
             #region creating tilemap
@@ -73,6 +69,7 @@ namespace Game_Changer__NEW_
             var russiaComponent = russiaEntity.addComponent(new Sprite(russiaInMap));
             var russiaCP = russiaEntity.addComponent(new Controlpoint(russiaEntity, tiledmap));
             russiaCP.factionName = "Russia";
+            russiaCP.luxuryExist = "No Luxury..";
             //System.Diagnostics.Debug.WriteLine(russiaComponent.transform.position.X); 
 
             var usaEntity = myScene.createEntity("usaFact", new Vector2(175, 115));
@@ -80,12 +77,14 @@ namespace Game_Changer__NEW_
             var usaComponent = usaEntity.addComponent(new Sprite(usaInMap));
             var usaCP = usaEntity.addComponent(new Controlpoint(usaEntity, tiledmap));
             usaCP.factionName = "USA";
+            usaCP.luxuryExist = "No Luxury..";
 
             var canadaEntity = myScene.createEntity("canadaFact", new Vector2(232, 171)); //(7,5)
             var canadaInMap = content.Load<Texture2D>("usa");
             var canadaComponent = canadaEntity.addComponent(new Sprite(canadaInMap));
             var canadaCP = canadaEntity.addComponent(new Controlpoint(canadaEntity, tiledmap));
             canadaCP.factionName = "Canada";
+            canadaCP.luxuryExist = "Luxury!";
 
             // note: currently comment it out to ease proof of concept :)
 
@@ -120,37 +119,21 @@ namespace Game_Changer__NEW_
 
             var armyAtlas = myScene.contentManager.Load<TextureAtlas>("armyAtlas");
             var anim = armyAtlas.getSpriteAnimation("flyright");
-            //var armyTest = new Army(tiledmap, russiaEntity, anim);
-
-            
-
-            //Vector2 tempVec = new Vector2(200, 200);
-            //Game1 tempScene = new Game1();
-            //tempScene.createProjectiles(tempVec, tiledmap, anim);
-
             var armyEntity = myScene.createEntity("dummyArmy", new Vector2(232, 171));
             
-            var armyAnimation = armyEntity.addComponent(new Sprite<Animation>(Animation.FlyRight, anim));
-           
-            armyEntity.addComponent(new Army(tiledmap, armyEntity, anim));
-            armyEntity.transform.position = new Vector2(200, 200);
+            var armyAnimation = usaEntity.addComponent(new Sprite<Animation>(Animation.FlyRight, anim));
+            var armyObject = new Army(tiledmap,usaEntity,anim);
+            usaEntity.addComponent(armyObject);
 
             //var spriteArmy = armyEntity.getComponent<Sprite<Animation>>();
             //spriteArmy.play(Animation.FlyRight);
             #endregion
             
             Core.scene = myScene;
+
+
         }
-        
-        //public Entity createProjectiles( Vector2 position, TiledMap tempTiledMap, SpriteAnimation tempAnim )
-        //{
-        //    var armyEntity = myScene.createEntity("armyInMap");
-        //    var armyComponent = armyEntity.addComponent(new Army(tempTiledMap, armyEntity, tempAnim ));
-        //    //armyEntity.addComponent(new Army(tempTiledMap, armyEntity, tempAnim));
-        //    System.Diagnostics.Debug.WriteLine("Ping");
-        //    return armyEntity;
-            
-        //}
+  
         /// <summary>
                  /// LoadContent will be called once per game and is the place to load
                  /// all of your content.
