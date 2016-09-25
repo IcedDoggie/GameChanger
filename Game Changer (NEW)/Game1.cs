@@ -6,6 +6,8 @@ using Nez.Sprites;
 using Nez.TextureAtlases;
 using Nez.Tiled;
 using Nez.UI;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Game_Changer__NEW_
 {
@@ -63,6 +65,7 @@ namespace Game_Changer__NEW_
             //tiledMapComponent.renderLayer = 0;
             #endregion
             #region for creating Control point
+            List<Controlpoint> controlPoint = new List<Controlpoint>();
 
             var russiaEntity = myScene.createEntity("russiaFact", new Vector2(596,171)); //(18,5)
             var russiaInMap = content.Load<Texture2D>("russia");
@@ -70,14 +73,16 @@ namespace Game_Changer__NEW_
             var russiaCP = russiaEntity.addComponent(new Controlpoint(russiaEntity, tiledmap));
             russiaCP.factionName = "Russia";
             russiaCP.luxuryExist = "No Luxury..";
+            controlPoint.Add(russiaCP);
             //System.Diagnostics.Debug.WriteLine(russiaComponent.transform.position.X); 
-
+            
             var usaEntity = myScene.createEntity("usaFact", new Vector2(175, 115));
             var usaInMap = content.Load<Texture2D>("usa");
             var usaComponent = usaEntity.addComponent(new Sprite(usaInMap));
             var usaCP = usaEntity.addComponent(new Controlpoint(usaEntity, tiledmap));
             usaCP.factionName = "USA";
             usaCP.luxuryExist = "No Luxury..";
+            
 
             var canadaEntity = myScene.createEntity("canadaFact", new Vector2(232, 171)); //(7,5)
             var canadaInMap = content.Load<Texture2D>("usa");
@@ -85,6 +90,9 @@ namespace Game_Changer__NEW_
             var canadaCP = canadaEntity.addComponent(new Controlpoint(canadaEntity, tiledmap));
             canadaCP.factionName = "Canada";
             canadaCP.luxuryExist = "Luxury!";
+            canadaCP.playerTerritory = true;
+            controlPoint.Add(canadaCP);
+            
 
             // note: currently comment it out to ease proof of concept :)
 
@@ -107,7 +115,7 @@ namespace Game_Changer__NEW_
             //var chinaEntity = myScene.createEntity("chinaFact", new Vector2(695, 239)); //(21,7)
             //var chinaInMap = content.Load<Texture2D>("usa");
             //var chinaComponent = chinaEntity.addComponent(new Sprite(chinaInMap));
-
+            Attack checkAttack = new Attack(tiledmap, controlPoint);
 
             #endregion
 

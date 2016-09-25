@@ -22,7 +22,7 @@ namespace Game_Changer__NEW_
         public int militaryPower;
         public int gold;
         public int luxuryPoint;
-        public int cphp;
+        
         public Entity cpEntity;
         TiledMap tiledmap;
         Point entityLocation;
@@ -41,7 +41,13 @@ namespace Game_Changer__NEW_
         public const float updateInterval = 250;
         public Timer statsTimer;
         public string luxuryExist;
+        public int cphp;
 
+        
+
+
+        public bool playerTerritory = false;
+        public bool territorySelected = false;
 
 
         public Controlpoint(Entity CP, TiledMap ref_tiledmap)
@@ -87,6 +93,7 @@ namespace Game_Changer__NEW_
                 cpEntity.addComponent(hpText);
                 cpEntity.addComponent(luxuryText);
                 flagForComponent = true;
+                
             }
             else if(mousePoint != entityLocation && flagForComponent == true )
             {
@@ -95,7 +102,7 @@ namespace Game_Changer__NEW_
                 cpEntity.removeComponent(hpText);
                 cpEntity.removeComponent(luxuryText);
             }
-            
+           
         }
 
     }

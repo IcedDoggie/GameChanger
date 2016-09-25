@@ -90,7 +90,7 @@ namespace Game_Changer__NEW_
                 //armyEntity = createProjectiles(tiledmap, armyAnim);
                 //var animationDummy = armyEntity.addComponent(new Sprite<Animation>(Animation.FlyRight, armyAnim));
                 //var armyComponent = armyEntity.addComponent(new Army(tiledmap, armyEntity, armyAnim));
-                System.Diagnostics.Debug.WriteLine("item created");
+                //System.Diagnostics.Debug.WriteLine("item created");
                 var armyComponent = createProjectiles(tempVec, tiledmap, armyAnim);
                 armyEntity.addComponent<Component>(armyComponent);
 
@@ -131,7 +131,7 @@ namespace Game_Changer__NEW_
             {
                 numberOfClicks = 0;
                 entityDestroyFlag = true;
-                System.Diagnostics.Debug.WriteLine("item removed");
+                //System.Diagnostics.Debug.WriteLine("item removed");
                 //originPointX = 0;
                 //originPointY = 0;
                 //pointX = 0;
