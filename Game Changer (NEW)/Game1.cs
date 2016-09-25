@@ -115,8 +115,8 @@ namespace Game_Changer__NEW_
             //var chinaEntity = myScene.createEntity("chinaFact", new Vector2(695, 239)); //(21,7)
             //var chinaInMap = content.Load<Texture2D>("usa");
             //var chinaComponent = chinaEntity.addComponent(new Sprite(chinaInMap));
-            Attack checkAttack = new Attack(tiledmap, controlPoint);
-
+            var checkAttack = new Attack(tiledmap, controlPoint);
+            var addAttack = tiledEntity.addComponent(checkAttack);
             #endregion
 
             #region Pathfinding

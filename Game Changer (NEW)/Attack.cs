@@ -29,14 +29,14 @@ namespace Game_Changer__NEW_
             tiledmap = ref_tiledmap;
             mousePoint = new Point(0, 0);
             cpList = abc;
-            
+            Debug.log(abc.Capacity);
         }
 
         void IUpdatable.update()
         {
-            location = tiledmap.worldToTilePosition(cpEntity.transform.position);
+            //location = tiledmap.worldToTilePosition(cpEntity.transform.position);
             mousePoint = tiledmap.worldToTilePosition(Input.mousePosition);
-            Debug.log("abc");
+            
             if (Input.leftMouseButtonPressed)
             {
                 foreach (var i in cpList)
@@ -66,9 +66,10 @@ namespace Game_Changer__NEW_
 
         }
 
-        
-
-        
+        public void update()
+        {
+            throw new NotImplementedException();
+        }
     }
 
    
