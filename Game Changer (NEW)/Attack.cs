@@ -12,9 +12,10 @@ namespace Game_Changer__NEW_
 {
     class Attack : Component, IUpdatable
     {
-        int hp;
-        bool territory;
-        string name="";
+        int playerHp;
+        //bool playerTerritory;
+        string playerName="";
+
         public Entity cpEntity;
         List<Controlpoint> cpList;
 
@@ -42,8 +43,23 @@ namespace Game_Changer__NEW_
                 {
                     if (mousePoint == tiledmap.worldToTilePosition(i.transform.position))
                     {
-                        
-                        i.cphp -= 5;
+                        if (i.controlPointID != playerName && i.playerTerritory == true)
+                        {
+                            playerName = i.controlPointID;
+                            playerHp = i.cphp;
+                        } else if (i.controlPointID != playerName && i.playerTerritory == false && playerName != "")
+                        {
+                            if (i.cphp > 0)
+                            {
+                                i.cphp -= 5;
+                                playerName = "";
+                            }
+                            if (i.cphp <= 0)
+                            {
+                                i.playerTerritory = true;
+                            }
+                            
+                        }
                     }
                 }
             }
