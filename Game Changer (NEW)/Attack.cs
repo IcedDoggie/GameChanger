@@ -84,7 +84,7 @@ namespace Game_Changer__NEW_
                                 }
                                 System.Diagnostics.Debug.WriteLine(start);
                                 System.Diagnostics.Debug.WriteLine(tempEnd);
-                                if(tempEnd==start)
+                                if(tempEnd == start)
                                 {
                                     i.cphp -= 5;
                                     playerName = "";
