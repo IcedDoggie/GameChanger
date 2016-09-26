@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Timers;
+
 
 namespace Game_Changer__NEW_
 {
@@ -15,7 +18,7 @@ namespace Game_Changer__NEW_
         int playerHp;
         //bool playerTerritory;
         string playerName="";
-
+        
         public Entity cpEntity;
         List<Controlpoint> cpList;
 
@@ -23,21 +26,35 @@ namespace Game_Changer__NEW_
         Point location;
         Point mousePoint;
 
+        //Timer 
+        private int start;
+        private int end;
+        private int now;
+        private int tempEnd;
+        private bool playerAtkFlag = false;
+        DateTime timerStart;
+
         public Attack(TiledMap ref_tiledmap, List<Controlpoint> abc)
         {
             location = new Point(0, 0);
             tiledmap = ref_tiledmap;
             mousePoint = new Point(0, 0);
             cpList = abc;
-            Debug.log(abc.Capacity);
+            //Debug.log(abc.Capacity);
         }
+        
+
 
         void IUpdatable.update()
         {
             //location = tiledmap.worldToTilePosition(cpEntity.transform.position);
             mousePoint = tiledmap.worldToTilePosition(Input.mousePosition);
-            
-            if (Input.leftMouseButtonPressed)
+            // timer for atk
+            var timerStart = DateTime.Now;
+            start = timerStart.Second;
+            end = start + 10;
+
+            if (Input.leftMouseButtonPressed || playerAtkFlag == true)
             {
                 foreach (var i in cpList)
                 {
@@ -47,12 +64,28 @@ namespace Game_Changer__NEW_
                         {
                             playerName = i.controlPointID;
                             playerHp = i.cphp;
-                        } else if (i.controlPointID != playerName && i.playerTerritory == false && playerName != "")
+                        } 
+                        else if (i.controlPointID != playerName && i.playerTerritory == false && playerName != "")
                         {
                             if (i.cphp > 0)
                             {
-                                i.cphp -= 5;
-                                playerName = "";
+                                // activating timer/buffer for atk to happen
+                                
+                                if(playerAtkFlag == false)
+                                {
+                                    now = start;
+                                    tempEnd = end;
+                                    playerAtkFlag = true;
+                                }
+                                System.Diagnostics.Debug.WriteLine(start);
+                                System.Diagnostics.Debug.WriteLine(tempEnd);
+                                if(tempEnd==start)
+                                {
+                                    i.cphp -= 5;
+                                    playerName = "";
+                                    playerAtkFlag = false;
+                                }
+
                             }
                             if (i.cphp <= 0)
                             {

@@ -125,13 +125,13 @@ namespace Game_Changer__NEW_
             #endregion
             #region animating the army
 
-            var armyAtlas = myScene.contentManager.Load<TextureAtlas>("armyAtlas");
-            var anim = armyAtlas.getSpriteAnimation("flyright");
-            var armyEntity = myScene.createEntity("dummyArmy", new Vector2(232, 171));
+            //var armyAtlas = myScene.contentManager.Load<TextureAtlas>("armyAtlas");
+            //var anim = armyAtlas.getSpriteAnimation("flyright");
+            //var armyEntity = myScene.createEntity("dummyArmy", new Vector2(232, 171));
             
-            var armyAnimation = usaEntity.addComponent(new Sprite<Animation>(Animation.FlyRight, anim));
-            var armyObject = new Army(tiledmap,usaEntity,anim);
-            usaEntity.addComponent(armyObject);
+            //var armyAnimation = usaEntity.addComponent(new Sprite<Animation>(Animation.FlyRight, anim));
+            //var armyObject = new Army(tiledmap,usaEntity,anim);
+            //usaEntity.addComponent(armyObject);
 
             //var spriteArmy = armyEntity.getComponent<Sprite<Animation>>();
             //spriteArmy.play(Animation.FlyRight);
