@@ -38,11 +38,12 @@ namespace Game_Changer__NEW_
         public Text statsText;
         public Text hpText;
         public Text luxuryText;
+        public Text territoyText;
         public const float updateInterval = 250;
         public Timer statsTimer;
         public string luxuryExist;
         public int cphp;
-
+        public string territory;
         
 
 
@@ -79,7 +80,14 @@ namespace Game_Changer__NEW_
             entityLocation = tiledmap.worldToTilePosition(cpEntity.transform.position);
             mousePoint = tiledmap.worldToTilePosition(Input.mousePosition);
             //System.Diagnostics.Debug.WriteLine(entityLocation);
-            
+            if(playerTerritory==true)
+            {
+                territory = "Player";
+            }
+            else
+            {
+                territory = "Enemy";
+            }
             if(mousePoint == entityLocation && flagForComponent == false)
             {
                 //System.Diagnostics.Debug.WriteLine("CP Found");
@@ -89,9 +97,11 @@ namespace Game_Changer__NEW_
                 statsText = new Text(Graphics.instance.bitmapFont, this.factionName, new Vector2(tiledX, tiledY), Color.LightGoldenrodYellow);
                 hpText = new Text(Graphics.instance.bitmapFont, this.cphp.ToString(), new Vector2(tiledX, tiledY+30), Color.LightGoldenrodYellow);
                 luxuryText = new Text(Graphics.instance.bitmapFont, this.luxuryExist, new Vector2(tiledX, tiledY + 60), Color.LightGoldenrodYellow);
+                territoyText = new Text(Graphics.instance.bitmapFont, this.territory, new Vector2(tiledX, tiledY + 90), Color.LightGoldenrodYellow);
                 cpEntity.addComponent(statsText);
                 cpEntity.addComponent(hpText);
                 cpEntity.addComponent(luxuryText);
+                cpEntity.addComponent(territoyText);
                 flagForComponent = true;
                 
             }
@@ -101,6 +111,7 @@ namespace Game_Changer__NEW_
                 cpEntity.removeComponent(statsText);
                 cpEntity.removeComponent(hpText);
                 cpEntity.removeComponent(luxuryText);
+                cpEntity.removeComponent(territoyText);
             }
            
         }
