@@ -57,6 +57,7 @@ namespace Game_Changer__NEW_
                             if (i.cphp <= 0)
                             {
                                 i.playerTerritory = true;
+                                
                             }
                             
                         }
