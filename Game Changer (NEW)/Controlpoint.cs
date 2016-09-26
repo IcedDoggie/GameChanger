@@ -76,6 +76,10 @@ namespace Game_Changer__NEW_
             if(replenishFlag == true)
             {
                 end = start + 5;
+                if(end > 60)
+                {
+                    end -= 60;
+                }
                 cphp++;
                 replenishFlag = false;
             }
@@ -110,7 +114,7 @@ namespace Game_Changer__NEW_
             {
                 territory = "Player";
             }
-            else
+            else if(playerTerritory == false)
             {
                 territory = "Enemy";
             }
