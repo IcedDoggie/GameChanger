@@ -53,6 +53,11 @@ namespace Game_Changer__NEW_
             var timerStart = DateTime.Now;
             start = timerStart.Second;
             end = start + 10;
+            // to solve the bug of end: it will exceed max of 60 seconds if +10
+            if(end > 60)
+            {
+                end -= 60;
+            }
 
             if (Input.leftMouseButtonPressed || playerAtkFlag == true)
             {
