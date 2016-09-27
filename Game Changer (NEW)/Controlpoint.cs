@@ -51,6 +51,13 @@ namespace Game_Changer__NEW_
         public int cphp;
         public string territory;
 
+        
+        //for timer
+        private int start;
+        private int end;
+        private bool replenishFlag = true;
+
+
 
         
         public bool playerTerritory = false;
@@ -76,8 +83,34 @@ namespace Game_Changer__NEW_
             }
 
         }
+
         void IUpdatable.update()
         {
+            #region CP's hp replenishment
+
+            var timerStart = DateTime.Now;
+            start = timerStart.Second;
+            if(replenishFlag == true)
+            {
+                end = start + 5;
+                if(end > 60)
+                {
+                    end -= 60;
+                }
+                cphp++;
+                replenishFlag = false;
+            }
+            else
+            {
+                if(start == end)
+                {
+                    replenishFlag = true;
+                }
+            }
+
+
+            #endregion
+            #region Text Visualization
             // this code is for shifting the text to top-left corner
             tiledX = tiledmap.widthInPixels;
             tiledY = tiledmap.heightInPixels;
@@ -98,7 +131,7 @@ namespace Game_Changer__NEW_
             {
                 territory = "Player";
             }
-            else
+            else if(playerTerritory == false)
             {
                 territory = "Enemy";
             }
@@ -126,10 +159,11 @@ namespace Game_Changer__NEW_
                 cpEntity.removeComponent(hpText);
                 cpEntity.removeComponent(luxuryText);
                 cpEntity.removeComponent(territoyText);
-            }
+            }         
+
+            #endregion
 
 
-            
         }
 
     }

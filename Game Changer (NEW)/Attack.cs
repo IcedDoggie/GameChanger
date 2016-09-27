@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
+using System.Timers;
+
 
 namespace Game_Changer__NEW_
 {
@@ -15,15 +18,30 @@ namespace Game_Changer__NEW_
         int playerHp;
         //bool playerTerritory;
         string playerName="";
-
+        
         public Entity cpEntity;
         List<Controlpoint> cpList;
         public int playerLuxuryCount = 0; //use to track player luxury
         public int enemyLuxuryCount = 0; //use to track enemy luxury
 
+
         TiledMap tiledmap;
         Point location;
         Point mousePoint;
+
+        //Timer 
+        private int start;
+        private int end;
+        private int now;
+        private int tempEnd;
+        private bool playerAtkFlag = false;
+        private bool botAtkFlag = true;
+        private int botEnd;
+        DateTime timerStart;
+        
+        //Bot Programming
+        private int playerCPCount = 2;
+        private int botCPCount = 1;
 
         public Attack(TiledMap ref_tiledmap, List<Controlpoint> abc)
         {
@@ -31,13 +49,16 @@ namespace Game_Changer__NEW_
             tiledmap = ref_tiledmap;
             mousePoint = new Point(0, 0);
             cpList = abc;
-            Debug.log(abc.Capacity);
+            //Debug.log(abc.Capacity);
         }
+        
+
 
         void IUpdatable.update()
         {
             //location = tiledmap.worldToTilePosition(cpEntity.transform.position);
             mousePoint = tiledmap.worldToTilePosition(Input.mousePosition);
+
 
             //to track luxury for gold purpose
             foreach (var i in cpList)
@@ -70,7 +91,21 @@ namespace Game_Changer__NEW_
             }
             //luxury function ends here
 
-            //attack functions and gold functions start here
+            
+
+            #region Timer
+            // timer for atk
+            var timerStart = DateTime.Now;
+            start = timerStart.Second;
+            end = start + 5;
+            // to solve the bug of end: it will exceed max of 60 seconds if +10
+            if(end > 60)
+            {
+                end -= 60;
+            }
+            #endregion
+
+            #region Player Attack Mode
 
             if (Input.leftMouseButtonPressed)
             {
@@ -82,17 +117,40 @@ namespace Game_Changer__NEW_
                         {
                             playerName = i.controlPointID;
                             playerHp = i.cphp;
-                        } else if (i.controlPointID != playerName && i.playerTerritory == false && playerName != "")
+                        } 
+                        else if (i.controlPointID != playerName && i.playerTerritory == false && playerName != "")
                         {
                             if (i.cphp > 0)
                             {
+
                                 i.cphp -= 5;
                                 Controlpoint.playerGold -= 5;
                                 playerName = "";
+
+                                // activating timer/buffer for atk to happen
+                                
+                                //if(playerAtkFlag == false)
+                                //{
+                                //    now = start;
+                                //    tempEnd = end;
+                                //    playerAtkFlag = true;
+                                //}
+                                //System.Diagnostics.Debug.WriteLine(start);
+                                //System.Diagnostics.Debug.WriteLine(tempEnd);
+                                //if(tempEnd == start)
+                                //{
+                                    i.cphp -= 5;
+                                    playerName = "";
+                                    //playerAtkFlag = false;
+                                //}
+
+
                             }
-                            if (i.cphp <= 0)
+                            //gold changes here
+                            if (i.cphp <= 0 && i.playerTerritory == false)
                             {
-                                Debug.log(Controlpoint.playerGold);
+
+                                Nez.Debug.log(Controlpoint.playerGold);
                                 i.playerTerritory = true;
                                 if(Controlpoint.playerLuxury==true)
                                 {
@@ -103,15 +161,79 @@ namespace Game_Changer__NEW_
                                 }
                                 
                                 Controlpoint.enemyGold -= 20;
-                                Debug.log(Controlpoint.playerGold);
+                                Nez.Debug.log(Controlpoint.playerGold);
+
+                                System.Diagnostics.Debug.WriteLine("Tada");
+                                i.playerTerritory = true;
+                                playerCPCount++;
+                                botCPCount--;
+                            }
+                            if (botCPCount == 0)
+                            {
+                                break;
+
                             }
                             
                         }
                     }
                 }
             }
-            //end here
+
            
+           
+
+            #endregion
+
+            #region Bot Mode
+            foreach (var i in cpList)
+            {
+                // check if still have territory or not
+                if (botCPCount != 0)
+                {
+                    // not attacking
+                    if (botAtkFlag == false)
+                    {
+                        if (botEnd == start)
+                            botAtkFlag = true; // change it to true so that bot attacks
+                    }
+                    // attacking mode
+                    else
+                    {
+                        botEnd = start + 5; // buffer of 5 seconds before next attack
+                        if (botEnd > 60)
+                        {
+                            botEnd -= 60;
+                        }
+                        if (i.playerTerritory == true && i.luxuryExist == true)
+                        {
+                            i.cphp = i.cphp - 5;
+                            botAtkFlag = false;
+                        }
+
+                        else if (i.playerTerritory == true && playerCPCount == 1)
+                        {
+                            i.cphp = i.cphp - 5;
+                            botAtkFlag = false;
+                        }
+                    }
+
+                    // change CP's owner
+                    if (i.cphp <= 0 && i.playerTerritory == true)
+                    {
+                        i.playerTerritory = false;
+                        playerCPCount--;
+                        botCPCount++;
+                        System.Diagnostics.Debug.WriteLine(playerCPCount);
+                    }
+
+                    if (playerCPCount == 0)
+                    {
+                        break;
+                    }
+                }
+            }
+            #endregion
+
         }
 
         

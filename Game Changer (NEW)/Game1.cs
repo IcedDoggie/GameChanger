@@ -28,7 +28,7 @@ namespace Game_Changer__NEW_
         MouseState mouse;
         Point mousePoint;
         public string cpName = "";
-        
+       
 
         public Game1() : base()
         {
@@ -82,8 +82,11 @@ namespace Game_Changer__NEW_
             var usaCP = usaEntity.addComponent(new Controlpoint(usaEntity, tiledmap));
             usaCP.factionName = "USA";
             usaCP.luxuryExist = false;
-            
+            usaCP.playerTerritory = true;
+            controlPoint.Add(usaCP);
 
+
+            
             var canadaEntity = myScene.createEntity("canadaFact", new Vector2(232, 171)); //(7,5)
             var canadaInMap = content.Load<Texture2D>("usa");
             var canadaComponent = canadaEntity.addComponent(new Sprite(canadaInMap));
@@ -115,8 +118,10 @@ namespace Game_Changer__NEW_
             //var chinaEntity = myScene.createEntity("chinaFact", new Vector2(695, 239)); //(21,7)
             //var chinaInMap = content.Load<Texture2D>("usa");
             //var chinaComponent = chinaEntity.addComponent(new Sprite(chinaInMap));
+
             var checkAttack = new Attack(tiledmap, controlPoint);
             var addAttack = tiledEntity.addComponent(checkAttack);
+
             #endregion
 
             #region Pathfinding
@@ -125,13 +130,13 @@ namespace Game_Changer__NEW_
             #endregion
             #region animating the army
 
-            var armyAtlas = myScene.contentManager.Load<TextureAtlas>("armyAtlas");
-            var anim = armyAtlas.getSpriteAnimation("flyright");
-            var armyEntity = myScene.createEntity("dummyArmy", new Vector2(232, 171));
+            //var armyAtlas = myScene.contentManager.Load<TextureAtlas>("armyAtlas");
+            //var anim = armyAtlas.getSpriteAnimation("flyright");
+            //var armyEntity = myScene.createEntity("dummyArmy", new Vector2(232, 171));
             
-            var armyAnimation = usaEntity.addComponent(new Sprite<Animation>(Animation.FlyRight, anim));
-            var armyObject = new Army(tiledmap,usaEntity,anim);
-            usaEntity.addComponent(armyObject);
+            //var armyAnimation = usaEntity.addComponent(new Sprite<Animation>(Animation.FlyRight, anim));
+            //var armyObject = new Army(tiledmap,usaEntity,anim);
+            //usaEntity.addComponent(armyObject);
 
             //var spriteArmy = armyEntity.getComponent<Sprite<Animation>>();
             //spriteArmy.play(Animation.FlyRight);
