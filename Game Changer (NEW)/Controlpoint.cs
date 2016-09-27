@@ -17,8 +17,8 @@ namespace Game_Changer__NEW_
     class Controlpoint : Component, IUpdatable
     {
 
-        public static int playerGold=100; //Total gold for player
-        public static int enemyGold=100; //total gold for enemy
+        public static int playerGold=50; //Total gold for player
+        public static int enemyGold=50; //total gold for enemy
         public static bool playerLuxury = false; //check whether player have any luxury point
         public static bool enemyLuxury = false; //check whether enemy have any point contain luxury
         public string controlPointID; // ID determines who owns the control point
@@ -130,7 +130,6 @@ namespace Game_Changer__NEW_
             //System.Diagnostics.Debug.WriteLine(entityLocation);
 
             if(playerTerritory == true)
-
             {
                 territory = "Player";
             }
@@ -143,7 +142,7 @@ namespace Game_Changer__NEW_
                 //System.Diagnostics.Debug.WriteLine("CP Found");
                 var tempEntity = this.entity.getComponent<Controlpoint>();
                 this.factionName = tempEntity.factionName;
-                System.Diagnostics.Debug.WriteLine(this.factionName);
+                //System.Diagnostics.Debug.WriteLine(this.factionName);
                 statsText = new Text(Graphics.instance.bitmapFont, this.factionName, new Vector2(tiledX, tiledY), Color.LightGoldenrodYellow);
                 hpText = new Text(Graphics.instance.bitmapFont, this.cphp.ToString(), new Vector2(tiledX, tiledY + 30), Color.LightGoldenrodYellow);
                 luxuryText = new Text(Graphics.instance.bitmapFont, this.luxuryStr, new Vector2(tiledX, tiledY + 60), Color.LightGoldenrodYellow);
@@ -159,7 +158,8 @@ namespace Game_Changer__NEW_
                 if(playerTerritory==true)
                 {
                     goldText = new Text(Graphics.instance.bitmapFont, playerGold.ToString(), new Vector2(tiledX, tiledY + 120), Color.LightGoldenrodYellow);
-                }else if(playerTerritory ==false)
+                }
+                if(playerTerritory ==false)
                 {
                     goldText = new Text(Graphics.instance.bitmapFont, enemyGold.ToString(), new Vector2(tiledX, tiledY + 120), Color.LightGoldenrodYellow);
                 }

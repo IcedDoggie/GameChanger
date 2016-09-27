@@ -43,6 +43,7 @@ namespace Game_Changer__NEW_
         private int playerCPCount = 2;
         private int botCPCount = 1;
 
+
         public Attack(TiledMap ref_tiledmap, List<Controlpoint> abc)
         {
             location = new Point(0, 0);
@@ -59,7 +60,7 @@ namespace Game_Changer__NEW_
             //location = tiledmap.worldToTilePosition(cpEntity.transform.position);
             mousePoint = tiledmap.worldToTilePosition(Input.mousePosition);
 
-
+            #region luxury
             //to track luxury for gold purpose
             foreach (var i in cpList)
             {
@@ -90,8 +91,8 @@ namespace Game_Changer__NEW_
                 Controlpoint.playerLuxury = true;
             }
             //luxury function ends here
+            #endregion
 
-            
 
             #region Timer
             // timer for atk
@@ -135,7 +136,8 @@ namespace Game_Changer__NEW_
                                 if(Controlpoint.playerLuxury==true)
                                 {
                                     Controlpoint.playerGold += Convert.ToInt32(50 * 1.5);
-                                }else
+                                }
+                                else
                                 {
                                     Controlpoint.playerGold += 50;
                                 }
@@ -151,7 +153,6 @@ namespace Game_Changer__NEW_
                             if (botCPCount == 0)
                             {
                                 break;
-
                             }
 
                         }
@@ -184,27 +185,29 @@ namespace Game_Changer__NEW_
                         {
                             botEnd -= 60;
                         }
-                        if (i.playerTerritory == true && i.luxuryExist == true)
+                        if (i.playerTerritory == true && i.luxuryExist == true && i.cphp > 0)
                         {
                             i.cphp = i.cphp - 5;
                             botAtkFlag = false;
                         }
 
-                        else if (i.playerTerritory == true && playerCPCount == 1)
+                        else if (i.playerTerritory == true && playerCPCount == 1 && i.cphp > 0)
                         {
                             i.cphp = i.cphp - 5;
                             botAtkFlag = false;
                         }
+
+                        // change CP's owner
+                        if (i.cphp <= 0 && i.playerTerritory == true)
+                        {
+                            i.playerTerritory = false;
+                            playerCPCount--;
+                            botCPCount++;
+                            System.Diagnostics.Debug.WriteLine("occupied by AI");
+                        }
                     }
 
-                    // change CP's owner
-                    if (i.cphp <= 0 && i.playerTerritory == true)
-                    {
-                        i.playerTerritory = false;
-                        playerCPCount--;
-                        botCPCount++;
-                        System.Diagnostics.Debug.WriteLine(playerCPCount);
-                    }
+ 
 
                     if (playerCPCount == 0)
                     {
