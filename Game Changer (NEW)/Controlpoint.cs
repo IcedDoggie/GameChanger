@@ -82,6 +82,7 @@ namespace Game_Changer__NEW_
                 }
                 cphp++;
                 replenishFlag = false;
+                System.Diagnostics.Debug.WriteLine(end);
             }
             else
             {
@@ -110,7 +111,7 @@ namespace Game_Changer__NEW_
             entityLocation = tiledmap.worldToTilePosition(cpEntity.transform.position);
             mousePoint = tiledmap.worldToTilePosition(Input.mousePosition);
             //System.Diagnostics.Debug.WriteLine(entityLocation);
-            if(playerTerritory==true)
+            if(playerTerritory == true)
             {
                 territory = "Player";
             }

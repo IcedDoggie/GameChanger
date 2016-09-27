@@ -17,8 +17,8 @@ namespace Game_Changer__NEW_
     {
         int playerHp;
         //bool playerTerritory;
-        string playerName="";
-        
+        string playerName = "";
+
         public Entity cpEntity;
         List<Controlpoint> cpList;
 
@@ -36,7 +36,7 @@ namespace Game_Changer__NEW_
         private bool botAtkFlag = true;
         private int botEnd;
         DateTime timerStart;
-        
+
         //Bot Programming
         private int playerCPCount = 2;
         private int botCPCount = 1;
@@ -49,7 +49,7 @@ namespace Game_Changer__NEW_
             cpList = abc;
             //Debug.log(abc.Capacity);
         }
-        
+
 
 
         void IUpdatable.update()
@@ -62,7 +62,7 @@ namespace Game_Changer__NEW_
             start = timerStart.Second;
             end = start + 5;
             // to solve the bug of end: it will exceed max of 60 seconds if +10
-            if(end > 60)
+            if (end > 60)
             {
                 end -= 60;
             }
@@ -79,13 +79,13 @@ namespace Game_Changer__NEW_
                         {
                             playerName = i.controlPointID;
                             playerHp = i.cphp;
-                        } 
+                        }
                         else if (i.controlPointID != playerName && i.playerTerritory == false && playerName != "")
                         {
                             if (i.cphp > 0)
                             {
                                 // activating timer/buffer for atk to happen
-                                
+
                                 //if(playerAtkFlag == false)
                                 //{
                                 //    now = start;
@@ -96,9 +96,9 @@ namespace Game_Changer__NEW_
                                 //System.Diagnostics.Debug.WriteLine(tempEnd);
                                 //if(tempEnd == start)
                                 //{
-                                    i.cphp -= 5;
-                                    playerName = "";
-                                    //playerAtkFlag = false;
+                                i.cphp -= 5;
+                                playerName = "";
+                                //playerAtkFlag = false;
                                 //}
 
                             }
@@ -113,7 +113,7 @@ namespace Game_Changer__NEW_
                             {
                                 break;
                             }
-                            
+
                         }
                     }
                 }
@@ -177,5 +177,5 @@ namespace Game_Changer__NEW_
         }
     }
 
-   
+
 }
