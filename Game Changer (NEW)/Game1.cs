@@ -28,7 +28,7 @@ namespace Game_Changer__NEW_
         MouseState mouse;
         Point mousePoint;
         public string cpName = "";
-        
+       
 
         public Game1() : base()
         {
@@ -72,7 +72,7 @@ namespace Game_Changer__NEW_
             var russiaComponent = russiaEntity.addComponent(new Sprite(russiaInMap));
             var russiaCP = russiaEntity.addComponent(new Controlpoint(russiaEntity, tiledmap));
             russiaCP.factionName = "Russia";
-            russiaCP.luxuryExist = "No Luxury..";
+            russiaCP.luxuryExist = false;
             controlPoint.Add(russiaCP);
             //System.Diagnostics.Debug.WriteLine(russiaComponent.transform.position.X); 
             
@@ -81,17 +81,18 @@ namespace Game_Changer__NEW_
             var usaComponent = usaEntity.addComponent(new Sprite(usaInMap));
             var usaCP = usaEntity.addComponent(new Controlpoint(usaEntity, tiledmap));
             usaCP.factionName = "USA";
-            usaCP.luxuryExist = "No Luxury..";
+            usaCP.luxuryExist = false;
             usaCP.playerTerritory = true;
             controlPoint.Add(usaCP);
-            
 
+
+            
             var canadaEntity = myScene.createEntity("canadaFact", new Vector2(232, 171)); //(7,5)
             var canadaInMap = content.Load<Texture2D>("usa");
             var canadaComponent = canadaEntity.addComponent(new Sprite(canadaInMap));
             var canadaCP = canadaEntity.addComponent(new Controlpoint(canadaEntity, tiledmap));
             canadaCP.factionName = "Canada";
-            canadaCP.luxuryExist = "Luxury!";
+            canadaCP.luxuryExist = true;
             canadaCP.playerTerritory = true;
             controlPoint.Add(canadaCP);
             

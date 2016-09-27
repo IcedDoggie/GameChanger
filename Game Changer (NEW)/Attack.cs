@@ -21,6 +21,8 @@ namespace Game_Changer__NEW_
 
         public Entity cpEntity;
         List<Controlpoint> cpList;
+        public int playerLuxuryCount = 0; //use to track player luxury
+        public int enemyLuxuryCount = 0; //use to track enemy luxury
 
 
         TiledMap tiledmap;
@@ -56,6 +58,41 @@ namespace Game_Changer__NEW_
         {
             //location = tiledmap.worldToTilePosition(cpEntity.transform.position);
             mousePoint = tiledmap.worldToTilePosition(Input.mousePosition);
+
+
+            //to track luxury for gold purpose
+            foreach (var i in cpList)
+            {
+                if (i.luxuryExist == true && i.playerTerritory == true)
+                {
+                    playerLuxuryCount++;
+                }
+                else if (i.luxuryExist == true && i.playerTerritory == true)
+                {
+                    enemyLuxuryCount++;
+                }
+            }
+            if (playerLuxuryCount > 0)
+            {
+                Controlpoint.playerLuxury = true;
+            }
+            else
+            {
+                Controlpoint.playerLuxury = true;
+            }
+
+            if (enemyLuxuryCount > 0)
+            {
+                Controlpoint.playerLuxury = true;
+            }
+            else
+            {
+                Controlpoint.playerLuxury = true;
+            }
+            //luxury function ends here
+
+            
+
             #region Timer
             // timer for atk
             var timerStart = DateTime.Now;
@@ -69,6 +106,7 @@ namespace Game_Changer__NEW_
             #endregion
 
             #region Player Attack Mode
+
             if (Input.leftMouseButtonPressed)
             {
                 foreach (var i in cpList)
@@ -84,26 +122,27 @@ namespace Game_Changer__NEW_
                         {
                             if (i.cphp > 0)
                             {
-                                // activating timer/buffer for atk to happen
-
-                                //if(playerAtkFlag == false)
-                                //{
-                                //    now = start;
-                                //    tempEnd = end;
-                                //    playerAtkFlag = true;
-                                //}
-                                //System.Diagnostics.Debug.WriteLine(start);
-                                //System.Diagnostics.Debug.WriteLine(tempEnd);
-                                //if(tempEnd == start)
-                                //{
                                 i.cphp -= 5;
+                                Controlpoint.playerGold -= 5;
                                 playerName = "";
-                                //playerAtkFlag = false;
-                                //}
-
                             }
+                            //gold changes here
                             if (i.cphp <= 0 && i.playerTerritory == false)
                             {
+
+                                Nez.Debug.log(Controlpoint.playerGold);
+                                i.playerTerritory = true;
+                                if(Controlpoint.playerLuxury==true)
+                                {
+                                    Controlpoint.playerGold += Convert.ToInt32(50 * 1.5);
+                                }else
+                                {
+                                    Controlpoint.playerGold += 50;
+                                }
+                                
+                                Controlpoint.enemyGold -= 20;
+                                Nez.Debug.log(Controlpoint.playerGold);
+
                                 System.Diagnostics.Debug.WriteLine("Tada");
                                 i.playerTerritory = true;
                                 playerCPCount++;
@@ -112,12 +151,17 @@ namespace Game_Changer__NEW_
                             if (botCPCount == 0)
                             {
                                 break;
+
                             }
 
                         }
                     }
                 }
             }
+
+           
+           
+
             #endregion
 
             #region Bot Mode
@@ -140,7 +184,7 @@ namespace Game_Changer__NEW_
                         {
                             botEnd -= 60;
                         }
-                        if (i.playerTerritory == true && i.luxuryExist == "Luxury!")
+                        if (i.playerTerritory == true && i.luxuryExist == true)
                         {
                             i.cphp = i.cphp - 5;
                             botAtkFlag = false;
@@ -169,12 +213,10 @@ namespace Game_Changer__NEW_
                 }
             }
             #endregion
+
         }
 
-        public void update()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 
 
