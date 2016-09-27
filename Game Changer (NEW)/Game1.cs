@@ -119,7 +119,7 @@ namespace Game_Changer__NEW_
             //var chinaInMap = content.Load<Texture2D>("usa");
             //var chinaComponent = chinaEntity.addComponent(new Sprite(chinaInMap));
 
-            var checkAttack = new Attack(tiledmap, controlPoint);
+            var checkAttack = new Attack(tiledmap, controlPoint, tiledEntity);
             var addAttack = tiledEntity.addComponent(checkAttack);
 
             #endregion

@@ -43,13 +43,23 @@ namespace Game_Changer__NEW_
         private int playerCPCount = 2;
         private int botCPCount = 1;
 
+        //Victory function
+        private int territoryPlayer = 0;
+        private int territoryEnemy = 0;
+        private Text victoryPlayerText;
+        private Text victoryEnemyText;
+        private string victoryPlayerStr = "Victory!!!";
+        private string victoryEnemyStr = "Defeated!!!";
+        private Entity gameEntity;
 
-        public Attack(TiledMap ref_tiledmap, List<Controlpoint> abc)
+
+        public Attack(TiledMap ref_tiledmap, List<Controlpoint> abc, Entity entity)
         {
             location = new Point(0, 0);
             tiledmap = ref_tiledmap;
             mousePoint = new Point(0, 0);
             cpList = abc;
+            gameEntity = entity; //for displaying text in game
             //Debug.log(abc.Capacity);
         }
 
@@ -217,6 +227,32 @@ namespace Game_Changer__NEW_
             }
             #endregion
 
+            #region Winning Text
+            foreach(var i in cpList)
+            {
+                if(i.playerTerritory == true)
+                {
+                    territoryPlayer++;
+                }else if(i.playerTerritory == false)
+                {
+                    territoryEnemy++;
+                }
+            }
+            if(territoryPlayer==0)
+            {
+                
+                victoryEnemyText = new Text(Graphics.instance.bitmapFont, victoryEnemyStr, new Vector2(480, 50), Color.LightGoldenrodYellow);
+                gameEntity.addComponent(victoryEnemyText);
+            }
+            else if(territoryEnemy ==0)
+            {
+                victoryPlayerText = new Text(Graphics.instance.bitmapFont, victoryPlayerStr, new Vector2(480, 50), Color.LightGoldenrodYellow);
+                
+                gameEntity.addComponent(victoryPlayerText);
+            }
+            territoryPlayer = 0;
+            territoryEnemy = 0;
+            #endregion
         }
 
         
