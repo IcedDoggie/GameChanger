@@ -145,11 +145,22 @@ namespace Game_Changer__NEW_
                 hpText = new Text(Graphics.instance.bitmapFont, this.cphp.ToString(), new Vector2(tiledX, tiledY + 30), Color.LightGoldenrodYellow);
                 luxuryText = new Text(Graphics.instance.bitmapFont, this.luxuryStr, new Vector2(tiledX, tiledY + 60), Color.LightGoldenrodYellow);
                 territoyText = new Text(Graphics.instance.bitmapFont, this.territory, new Vector2(tiledX, tiledY + 90), Color.LightGoldenrodYellow);
+                
                 cpEntity.addComponent(statsText);
                 cpEntity.addComponent(hpText);
                 cpEntity.addComponent(luxuryText);
                 cpEntity.addComponent(territoyText);
+                
                 flagForComponent = true;
+                //text for gold to shown properly for player and enemy
+                if(playerTerritory==true)
+                {
+                    goldText = new Text(Graphics.instance.bitmapFont, playerGold.ToString(), new Vector2(tiledX, tiledY + 120), Color.LightGoldenrodYellow);
+                }else if(playerTerritory ==false)
+                {
+                    goldText = new Text(Graphics.instance.bitmapFont, enemyGold.ToString(), new Vector2(tiledX, tiledY + 120), Color.LightGoldenrodYellow);
+                }
+                cpEntity.addComponent(goldText);
 
             }
             else if (mousePoint != entityLocation && flagForComponent == true)
@@ -159,6 +170,7 @@ namespace Game_Changer__NEW_
                 cpEntity.removeComponent(hpText);
                 cpEntity.removeComponent(luxuryText);
                 cpEntity.removeComponent(territoyText);
+                cpEntity.removeComponent(goldText);
             }         
 
             #endregion
