@@ -18,6 +18,8 @@ namespace Game_Changer__NEW_
 
         public Entity cpEntity;
         List<Controlpoint> cpList;
+        public int playerLuxuryCount = 0; //use to track player luxury
+        public int enemyLuxuryCount = 0; //use to track enemy luxury
 
         TiledMap tiledmap;
         Point location;
@@ -36,7 +38,40 @@ namespace Game_Changer__NEW_
         {
             //location = tiledmap.worldToTilePosition(cpEntity.transform.position);
             mousePoint = tiledmap.worldToTilePosition(Input.mousePosition);
-            
+
+            //to track luxury for gold purpose
+            foreach (var i in cpList)
+            {
+                if (i.luxuryExist == true && i.playerTerritory == true)
+                {
+                    playerLuxuryCount++;
+                }
+                else if (i.luxuryExist == true && i.playerTerritory == true)
+                {
+                    enemyLuxuryCount++;
+                }
+            }
+            if (playerLuxuryCount > 0)
+            {
+                Controlpoint.playerLuxury = true;
+            }
+            else
+            {
+                Controlpoint.playerLuxury = true;
+            }
+
+            if (enemyLuxuryCount > 0)
+            {
+                Controlpoint.playerLuxury = true;
+            }
+            else
+            {
+                Controlpoint.playerLuxury = true;
+            }
+            //luxury function ends here
+
+            //attack functions and gold functions start here
+
             if (Input.leftMouseButtonPressed)
             {
                 foreach (var i in cpList)
@@ -52,25 +87,34 @@ namespace Game_Changer__NEW_
                             if (i.cphp > 0)
                             {
                                 i.cphp -= 5;
+                                Controlpoint.playerGold -= 5;
                                 playerName = "";
                             }
                             if (i.cphp <= 0)
                             {
+                                Debug.log(Controlpoint.playerGold);
                                 i.playerTerritory = true;
+                                if(Controlpoint.playerLuxury==true)
+                                {
+                                    Controlpoint.playerGold += Convert.ToInt32(50 * 1.5);
+                                }else
+                                {
+                                    Controlpoint.playerGold += 50;
+                                }
                                 
+                                Controlpoint.enemyGold -= 20;
+                                Debug.log(Controlpoint.playerGold);
                             }
                             
                         }
                     }
                 }
             }
-
+            //end here
+           
         }
 
-        public void update()
-        {
-            throw new NotImplementedException();
-        }
+        
     }
 
    

@@ -17,6 +17,10 @@ namespace Game_Changer__NEW_
     class Controlpoint : Component, IUpdatable
     {
 
+        public static int playerGold=100; //Total gold for player
+        public static int enemyGold=100; //total gold for enemy
+        public static bool playerLuxury = false; //check whether player have any luxury point
+        public static bool enemyLuxury = false; //check whether enemy have any point contain luxury
         public string controlPointID; // ID determines who owns the control point
         public string factionName;
         public int militaryPower;
@@ -39,14 +43,16 @@ namespace Game_Changer__NEW_
         public Text hpText;
         public Text luxuryText;
         public Text territoyText;
+        public Text goldText;
         public const float updateInterval = 250;
         public Timer statsTimer;
-        public string luxuryExist;
+        public bool luxuryExist; //condition for gold purpose
+        public string luxuryStr; //string for text purpose
         public int cphp;
         public string territory;
+
+
         
-
-
         public bool playerTerritory = false;
         public bool territorySelected = false;
 
@@ -56,11 +62,19 @@ namespace Game_Changer__NEW_
             cpEntity = CP;
             controlPointID = CP.name;
             cphp = 20;
-            
 
+            
             entityLocation = new Point(0, 0);
             mousePoint = new Point(0, 0);
             tiledmap = ref_tiledmap;
+            if(luxuryExist==true)
+            {
+                luxuryStr = "Have luxury";
+            }else if(luxuryExist==false)
+            {
+                luxuryStr = "No luxury";
+            }
+
         }
         void IUpdatable.update()
         {
@@ -80,7 +94,7 @@ namespace Game_Changer__NEW_
             entityLocation = tiledmap.worldToTilePosition(cpEntity.transform.position);
             mousePoint = tiledmap.worldToTilePosition(Input.mousePosition);
             //System.Diagnostics.Debug.WriteLine(entityLocation);
-            if(playerTerritory==true)
+            if (playerTerritory == true)
             {
                 territory = "Player";
             }
@@ -88,24 +102,24 @@ namespace Game_Changer__NEW_
             {
                 territory = "Enemy";
             }
-            if(mousePoint == entityLocation && flagForComponent == false)
+            if (mousePoint == entityLocation && flagForComponent == false)
             {
                 //System.Diagnostics.Debug.WriteLine("CP Found");
                 var tempEntity = this.entity.getComponent<Controlpoint>();
                 this.factionName = tempEntity.factionName;
                 System.Diagnostics.Debug.WriteLine(this.factionName);
                 statsText = new Text(Graphics.instance.bitmapFont, this.factionName, new Vector2(tiledX, tiledY), Color.LightGoldenrodYellow);
-                hpText = new Text(Graphics.instance.bitmapFont, this.cphp.ToString(), new Vector2(tiledX, tiledY+30), Color.LightGoldenrodYellow);
-                luxuryText = new Text(Graphics.instance.bitmapFont, this.luxuryExist, new Vector2(tiledX, tiledY + 60), Color.LightGoldenrodYellow);
+                hpText = new Text(Graphics.instance.bitmapFont, this.cphp.ToString(), new Vector2(tiledX, tiledY + 30), Color.LightGoldenrodYellow);
+                luxuryText = new Text(Graphics.instance.bitmapFont, this.luxuryStr, new Vector2(tiledX, tiledY + 60), Color.LightGoldenrodYellow);
                 territoyText = new Text(Graphics.instance.bitmapFont, this.territory, new Vector2(tiledX, tiledY + 90), Color.LightGoldenrodYellow);
                 cpEntity.addComponent(statsText);
                 cpEntity.addComponent(hpText);
                 cpEntity.addComponent(luxuryText);
                 cpEntity.addComponent(territoyText);
                 flagForComponent = true;
-                
+
             }
-            else if(mousePoint != entityLocation && flagForComponent == true )
+            else if (mousePoint != entityLocation && flagForComponent == true)
             {
                 flagForComponent = false;
                 cpEntity.removeComponent(statsText);
@@ -113,7 +127,9 @@ namespace Game_Changer__NEW_
                 cpEntity.removeComponent(luxuryText);
                 cpEntity.removeComponent(territoyText);
             }
-           
+
+
+            
         }
 
     }
