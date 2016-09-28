@@ -40,8 +40,8 @@ namespace Game_Changer__NEW_
         DateTime timerStart;
 
         //Bot Programming
-        private int playerCPCount = 0;
-        private int botCPCount = 0;
+        private int playerCPCount = 2;
+        private int botCPCount = 1;
 
         //Victory function
         private Text victoryPlayerText;
@@ -211,31 +211,18 @@ namespace Game_Changer__NEW_
                         {
                             botEnd -= 60;
                         }
-                        if(playerCPCount>0)
-                        {
-                            for(var j=0;j<3;j++)
-                            {
-                                if(i.cost==j)
-                                {
-                                    i.cphp = i.cphp - 5;
-                                    botAtkFlag = false;
-                                }else
-                                {
-                                    break;
-                                }
-                            }
-                        }
-                        //if (i.playerTerritory == true && i.luxuryExist == true && i.cphp > 0)
-                        //{
-                        //    i.cphp = i.cphp - 5;
-                        //    botAtkFlag = false;
-                        //}
 
-                        //else if (i.playerTerritory == true && playerCPCount == 1 && i.cphp > 0)
-                        //{
-                        //    i.cphp = i.cphp - 5;
-                        //    botAtkFlag = false;
-                        //}
+                        if (i.playerTerritory == true && i.luxuryExist == true && i.cphp > 0)
+                        {
+                            i.cphp = i.cphp - 5;
+                            botAtkFlag = false;
+                        }
+
+                        else if (i.playerTerritory == true && playerCPCount == 1 && i.cphp > 0)
+                        {
+                            i.cphp = i.cphp - 5;
+                            botAtkFlag = false;
+                        }
 
                         // change CP's owner
                         if (i.cphp <= 0 && i.playerTerritory == true)
