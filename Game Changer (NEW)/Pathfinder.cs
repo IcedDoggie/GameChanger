@@ -34,7 +34,7 @@ namespace Game_Changer__NEW_
             _gridGraph = new UnweightedGridGraph(layer);
             _astarSearchPath = _gridGraph.search( _start, _end );
 
-            Debug.drawTextFromBottom = true;
+            //Debug.drawTextFromBottom = true;
 
         }
 
@@ -74,7 +74,7 @@ namespace Game_Changer__NEW_
                     //System.Diagnostics.Debug.WriteLine(x);
                     //System.Diagnostics.Debug.WriteLine(y);
 
-                    graphics.batcher.drawPixel(x - 1, y - 1, Color.Yellow, 4);
+                    //graphics.batcher.drawPixel(x - 1, y - 1, Color.Yellow, 4);
                     //System.Diagnostics.Debug.WriteLine(node);
                 }
             }

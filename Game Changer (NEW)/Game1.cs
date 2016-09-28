@@ -81,7 +81,7 @@ namespace Game_Changer__NEW_
             var usaComponent = usaEntity.addComponent(new Sprite(usaInMap));
             var usaCP = usaEntity.addComponent(new Controlpoint(usaEntity, tiledmap));
             usaCP.factionName = "USA";
-            usaCP.luxuryExist = false;
+            usaCP.luxuryExist = true;
             usaCP.playerTerritory = true;
             controlPoint.Add(usaCP);
 
@@ -95,29 +95,36 @@ namespace Game_Changer__NEW_
             canadaCP.luxuryExist = true;
             canadaCP.playerTerritory = true;
             controlPoint.Add(canadaCP);
-            
 
-            // note: currently comment it out to ease proof of concept :)
 
-            //var susaEntity = myScene.createEntity("susaFact", new Vector2(232, 239));//(7,7)
-            //var susaInMap = content.Load<Texture2D>("usa");
-            //var susaComponent = susaEntity.addComponent(new Sprite(susaInMap));
+            var greenlandEntity = myScene.createEntity("greenlandFact", new Vector2(397, 102)); //(12,3)
+            var greenlandInMap = content.Load<Texture2D>("usa");
+            var greenlandComponent = greenlandEntity.addComponent(new Sprite(greenlandInMap));
+            var greenlandCP = greenlandEntity.addComponent(new Controlpoint(greenlandEntity, tiledmap));
+            greenlandCP.factionName = "Greenland";
+            greenlandCP.luxuryExist = true;
+            greenlandCP.playerTerritory = true;
+            controlPoint.Add(greenlandCP);
 
-            //var greenlandEntity = myScene.createEntity("greenlandFact", new Vector2(397, 102)); //(12,3)
-            //var greenlandInMap = content.Load<Texture2D>("usa");
-            //var greenlandComponent = greenlandEntity.addComponent(new Sprite(greenlandInMap));
+            var brazilEntity = myScene.createEntity("brazilFact", new Vector2(331, 375)); //(10,11)
+            var brazilInMap = content.Load<Texture2D>("russia");
+            var brazilComponent = brazilEntity.addComponent(new Sprite(brazilInMap));
+            var brazilCP = brazilEntity.addComponent(new Controlpoint(brazilEntity, tiledmap));
+            brazilCP.factionName = "Brazil";
+            brazilCP.luxuryExist = true;
+            brazilCP.playerTerritory = false;
+            controlPoint.Add(brazilCP);
 
-            //var brazilEntity = myScene.createEntity("brazilFact", new Vector2(331, 375)); //(10,11)
-            //var brazilInMap = content.Load<Texture2D>("usa");
-            //var brazilComponent = brazilEntity.addComponent(new Sprite(brazilInMap));
+            var australiaEntity = myScene.createEntity("australiaFact", new Vector2(500, 300)); //(24,12)
+            var australiaInMap = content.Load<Texture2D>("russia");
+            var australiaComponent = australiaEntity.addComponent(new Sprite(australiaInMap));
+            var australiaCP = australiaEntity.addComponent(new Controlpoint(australiaEntity, tiledmap));
+            australiaCP.factionName = "Africa";
+            australiaCP.luxuryExist = true;
+            australiaCP.playerTerritory = false;
+            controlPoint.Add(australiaCP);
 
-            //var australiaEntity = myScene.createEntity("australiaFact", new Vector2(794, 410)); //(24,12)
-            //var australiaInMap = content.Load<Texture2D>("usa");
-            //var australiaComponent = australiaEntity.addComponent(new Sprite(australiaInMap));
 
-            //var chinaEntity = myScene.createEntity("chinaFact", new Vector2(695, 239)); //(21,7)
-            //var chinaInMap = content.Load<Texture2D>("usa");
-            //var chinaComponent = chinaEntity.addComponent(new Sprite(chinaInMap));
 
             var checkAttack = new Attack(tiledmap, controlPoint, tiledEntity);
             var addAttack = tiledEntity.addComponent(checkAttack);

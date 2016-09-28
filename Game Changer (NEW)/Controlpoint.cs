@@ -185,13 +185,16 @@ namespace Game_Changer__NEW_
             if(cphp<= 10 && luxuryExist==true)
             {
                 cost = 0;
-            }else if(cphp <=10 && luxuryExist == false)
+            }
+            else if(cphp <=10 && luxuryExist == false)
             {
                 cost = 1;
-            }else if(luxuryExist==true && cphp > 10)
+            }
+            else if(luxuryExist==true && cphp > 10)
             {
                 cost = 1;
-            }else
+            }
+            else
             {
                 cost = 2;
             }
