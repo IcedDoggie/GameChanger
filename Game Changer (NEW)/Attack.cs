@@ -215,12 +215,14 @@ namespace Game_Changer__NEW_
                         if (i.playerTerritory == true && i.luxuryExist == true && i.cphp > 0)
                         {
                             i.cphp = i.cphp - 5;
+                            Controlpoint.enemyGold -= 5;
                             botAtkFlag = false;
                         }
 
                         else if (i.playerTerritory == true && playerCPCount == 1 && i.cphp > 0)
                         {
                             i.cphp = i.cphp - 5;
+                            Controlpoint.enemyGold -= 5;
                             botAtkFlag = false;
                         }
 
