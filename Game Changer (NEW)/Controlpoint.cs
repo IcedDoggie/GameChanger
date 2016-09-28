@@ -102,7 +102,7 @@ namespace Game_Changer__NEW_
                 }
                 cphp++;
                 replenishFlag = false;
-                System.Diagnostics.Debug.WriteLine(end);
+                //System.Diagnostics.Debug.WriteLine(end);
             }
             else
             {
