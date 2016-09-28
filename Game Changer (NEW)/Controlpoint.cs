@@ -23,9 +23,7 @@ namespace Game_Changer__NEW_
         public static bool enemyLuxury = false; //check whether enemy have any point contain luxury
         public string controlPointID; // ID determines who owns the control point
         public string factionName;
-        public int militaryPower;
-        public int gold;
-        public int luxuryPoint;
+        public int cost; //for the cost purpose in attack.cs
         
         public Entity cpEntity;
         TiledMap tiledmap;
@@ -74,18 +72,23 @@ namespace Game_Changer__NEW_
             entityLocation = new Point(0, 0);
             mousePoint = new Point(0, 0);
             tiledmap = ref_tiledmap;
-            if(luxuryExist==true)
-            {
-                luxuryStr = "Have luxury";
-            }else if(luxuryExist==false)
-            {
-                luxuryStr = "No luxury";
-            }
+            
 
         }
 
         void IUpdatable.update()
         {
+            #region Check Luxury
+            if (luxuryExist == true)
+            {
+                luxuryStr = "Have luxury";
+            }
+            else if (luxuryExist == false)
+            {
+                luxuryStr = "No luxury";
+            }
+            #endregion
+            
             #region CP's hp replenishment
 
             var timerStart = DateTime.Now;
@@ -174,11 +177,25 @@ namespace Game_Changer__NEW_
                 cpEntity.removeComponent(luxuryText);
                 cpEntity.removeComponent(territoyText);
                 cpEntity.removeComponent(goldText);
-            }         
+            }
 
             #endregion
 
-
+            #region cost function
+            if(cphp<= 10 && luxuryExist==true)
+            {
+                cost = 0;
+            }else if(cphp <=10 && luxuryExist == false)
+            {
+                cost = 1;
+            }else if(luxuryExist==true && cphp > 10)
+            {
+                cost = 1;
+            }else
+            {
+                cost = 2;
+            }
+            #endregion
         }
 
     }

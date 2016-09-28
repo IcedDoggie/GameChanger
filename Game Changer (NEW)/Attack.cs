@@ -40,18 +40,18 @@ namespace Game_Changer__NEW_
         DateTime timerStart;
 
         //Bot Programming
-        private int playerCPCount = 2;
-        private int botCPCount = 1;
+        private int playerCPCount = 0;
+        private int botCPCount = 0;
 
         //Victory function
-        private int territoryPlayer = 0;
-        private int territoryEnemy = 0;
         private Text victoryPlayerText;
         private Text victoryEnemyText;
         private string victoryPlayerStr = "Victory!!!";
         private string victoryEnemyStr = "Defeated!!!";
         private Entity gameEntity;
 
+        //cost function
+        private int cost = 0;
 
         public Attack(TiledMap ref_tiledmap, List<Controlpoint> abc, Entity entity)
         {
@@ -114,6 +114,21 @@ namespace Game_Changer__NEW_
             {
                 end -= 60;
             }
+            #endregion
+
+            #region Calculate territory number
+            foreach (var i in cpList)
+            {
+                if (i.playerTerritory == true)
+                {
+                    playerCPCount++;
+                }
+                else if (i.playerTerritory == false)
+                {
+                    botCPCount++;
+                }
+            }
+
             #endregion
 
             #region Player Attack Mode
@@ -196,17 +211,31 @@ namespace Game_Changer__NEW_
                         {
                             botEnd -= 60;
                         }
-                        if (i.playerTerritory == true && i.luxuryExist == true && i.cphp > 0)
+                        if(playerCPCount>0)
                         {
-                            i.cphp = i.cphp - 5;
-                            botAtkFlag = false;
+                            for(var j=0;j<3;j++)
+                            {
+                                if(i.cost==j)
+                                {
+                                    i.cphp = i.cphp - 5;
+                                    botAtkFlag = false;
+                                }else
+                                {
+                                    break;
+                                }
+                            }
                         }
+                        //if (i.playerTerritory == true && i.luxuryExist == true && i.cphp > 0)
+                        //{
+                        //    i.cphp = i.cphp - 5;
+                        //    botAtkFlag = false;
+                        //}
 
-                        else if (i.playerTerritory == true && playerCPCount == 1 && i.cphp > 0)
-                        {
-                            i.cphp = i.cphp - 5;
-                            botAtkFlag = false;
-                        }
+                        //else if (i.playerTerritory == true && playerCPCount == 1 && i.cphp > 0)
+                        //{
+                        //    i.cphp = i.cphp - 5;
+                        //    botAtkFlag = false;
+                        //}
 
                         // change CP's owner
                         if (i.cphp <= 0 && i.playerTerritory == true)
@@ -230,30 +259,21 @@ namespace Game_Changer__NEW_
             #endregion
 
             #region Winning Text
-            foreach(var i in cpList)
-            {
-                if(i.playerTerritory == true)
-                {
-                    territoryPlayer++;
-                }else if(i.playerTerritory == false)
-                {
-                    territoryEnemy++;
-                }
-            }
-            if(territoryPlayer==0 || Controlpoint.playerGold<=0)
+            
+            if(playerCPCount == 0 || Controlpoint.playerGold<=0)
             {
                 
                 victoryEnemyText = new Text(Graphics.instance.bitmapFont, victoryEnemyStr, new Vector2(480, 50), Color.LightGoldenrodYellow);
                 gameEntity.addComponent(victoryEnemyText);
             }
-            else if(territoryEnemy ==0 || Controlpoint.enemyGold<=0)
+            else if(botCPCount == 0 || Controlpoint.enemyGold<=0)
             {
                 victoryPlayerText = new Text(Graphics.instance.bitmapFont, victoryPlayerStr, new Vector2(480, 50), Color.LightGoldenrodYellow);
                 
                 gameEntity.addComponent(victoryPlayerText);
             }
-            territoryPlayer = 0;
-            territoryEnemy = 0;
+            playerCPCount = 0;
+            botCPCount = 0;
             #endregion
         }
 
