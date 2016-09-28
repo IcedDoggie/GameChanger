@@ -212,22 +212,24 @@ namespace Game_Changer__NEW_
                             botEnd -= 60;
                         }
 
-                        if (i.playerTerritory == true && i.luxuryExist == true && i.cphp > 0)
+                        if (i.playerTerritory == true && i.cphp < 13 && i.luxuryExist == true )
                         {
                             i.cphp = i.cphp - 5;
                             Controlpoint.enemyGold -= 5;
                             botAtkFlag = false;
                         }
 
-                        else if (i.playerTerritory == true && i.cphp < 13 && i.luxuryExist == true )
+                        else if (i.playerTerritory == true && i.luxuryExist == true && i.cphp > 0)
                         {
                             i.cphp = i.cphp - 5;
+                            Controlpoint.enemyGold -= 5;
                             botAtkFlag = false;
                         }
 
                         else if (i.playerTerritory == true && i.cphp < 13 && i.luxuryExist == false)
                         {
                             i.cphp = i.cphp - 5;
+                            Controlpoint.enemyGold -= 5;
                             botAtkFlag = false;
                         }
 
@@ -243,10 +245,22 @@ namespace Game_Changer__NEW_
                         // change CP's owner
                         if (i.cphp <= 0 && i.playerTerritory == true)
                         {
+                            if (Controlpoint.enemyLuxury == true)
+                            {
+                                Controlpoint.enemyGold += Convert.ToInt32(50 * 1.5);
+                            }
+                            else
+                            {
+                                Controlpoint.enemyGold += 50;
+                            }
+
+                            Controlpoint.enemyGold -= 20;
+
                             i.playerTerritory = false;
                             playerCPCount--;
                             botCPCount++;
                             i.cphp = 10; //Captured point auto get 10hp to prevent instant recapture back
+                            
                             System.Diagnostics.Debug.WriteLine("occupied by AI");
                         }
                     }
