@@ -157,6 +157,7 @@ namespace Game_Changer__NEW_
 
                                 System.Diagnostics.Debug.WriteLine("Tada");
                                 i.playerTerritory = true;
+                                i.cphp = 10; //set the hp of the point to 10 to prevent recapture back
                                 playerCPCount++;
                                 botCPCount--;
                             }
@@ -213,6 +214,7 @@ namespace Game_Changer__NEW_
                             i.playerTerritory = false;
                             playerCPCount--;
                             botCPCount++;
+                            i.cphp = 10; //Captured point auto get 10hp to prevent instant recapture back
                             System.Diagnostics.Debug.WriteLine("occupied by AI");
                         }
                     }
@@ -238,13 +240,13 @@ namespace Game_Changer__NEW_
                     territoryEnemy++;
                 }
             }
-            if(territoryPlayer==0)
+            if(territoryPlayer==0 || Controlpoint.playerGold<=0)
             {
                 
                 victoryEnemyText = new Text(Graphics.instance.bitmapFont, victoryEnemyStr, new Vector2(480, 50), Color.LightGoldenrodYellow);
                 gameEntity.addComponent(victoryEnemyText);
             }
-            else if(territoryEnemy ==0)
+            else if(territoryEnemy ==0 || Controlpoint.enemyGold<=0)
             {
                 victoryPlayerText = new Text(Graphics.instance.bitmapFont, victoryPlayerStr, new Vector2(480, 50), Color.LightGoldenrodYellow);
                 
