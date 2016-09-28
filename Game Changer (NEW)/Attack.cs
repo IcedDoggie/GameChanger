@@ -40,8 +40,8 @@ namespace Game_Changer__NEW_
         DateTime timerStart;
 
         //Bot Programming
-        private int playerCPCount = 2;
-        private int botCPCount = 1;
+        private int playerCPCount = 0;
+        private int botCPCount = 0;
 
         //Victory function
         private Text victoryPlayerText;
