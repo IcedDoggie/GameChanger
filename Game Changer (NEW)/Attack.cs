@@ -218,6 +218,20 @@ namespace Game_Changer__NEW_
                             botAtkFlag = false;
                         }
 
+                        else if (i.playerTerritory == true && i.cphp < 13 && i.luxuryExist == true )
+                        {
+                            i.cphp = i.cphp - 5;
+                            botAtkFlag = false;
+                        }
+
+                        else if (i.playerTerritory == true && i.cphp < 13 && i.luxuryExist == false)
+                        {
+                            i.cphp = i.cphp - 5;
+                            botAtkFlag = false;
+                        }
+
+                       
+
                         else if (i.playerTerritory == true && playerCPCount == 1 && i.cphp > 0)
                         {
                             i.cphp = i.cphp - 5;

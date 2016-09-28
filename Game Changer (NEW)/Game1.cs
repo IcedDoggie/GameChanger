@@ -81,7 +81,7 @@ namespace Game_Changer__NEW_
             var usaComponent = usaEntity.addComponent(new Sprite(usaInMap));
             var usaCP = usaEntity.addComponent(new Controlpoint(usaEntity, tiledmap));
             usaCP.factionName = "USA";
-            usaCP.luxuryExist = true;
+            usaCP.luxuryExist = false;
             usaCP.playerTerritory = true;
             controlPoint.Add(usaCP);
 
